@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sinapiPRO="http://sinapiPRO.ifrn.edu.br">
+	
+<body>
+<aside class="aw-layout-sidebar  js-sidebar" th:fragment="layout-sidebar">
+	<div class="aw-layout-sidebar__content">
+
+    	<nav class="aw-menu  js-menu">
+      		<ul class="aw-menu__list">
+
+        		<li class="aw-menu__item" sinapiPRO:menu="@{/}">
+          			<a th:href="@{/}"><i class="fa  fa-fw  fa-home"></i><span>Dashboard</span></a>
+        		</li>
+        		
+        		<li class="aw-menu__item" sinapiPRO:menu="@{/}">
+          			<a th:href="@{/orcamentos}"><i class="fa  fa-fw  fa-table"></i><span>Todos Orçamentos</span></a>
+        		</li>
+        		
+        		<li class="aw-menu__item" sinapiPRO:menu="@{/}">
+          			<a th:href="@{/orcamentoAtual}"><i class="fa  fa-fw  fa-list-ol"></i><span>Orcamento Atual</span></a>
+        		</li>
+        		
+        		<li class="aw-menu__item">
+          			<a href="#">
+            			<i class="fa  fa-fw  fa-credit-cubes"></i><span>Composições</span>
+            			<i class="aw-menu__navigation-icon  fa"></i>
+          			</a>
+      
+          			<ul class="aw-menu__list  aw-menu__list--sublist">
+			            <li class="aw-menu__item  aw-menu__item--link" sinapiPRO:menu="@{/vendas.+}">
+			            	<a th:href="@{/vendas/nova}"><i class="fa  fa-fw  fa-strip-s">Sinapi</a>
+			            </li>
+			            
+			            <li class="aw-menu__item  aw-menu__item--link" sinapiPRO:menu="@{/vendas}">
+			            	<a th:href="@{/vendas}">Base Sinapi</a>
+			            </li>
+			            
+			            <div>
+			            
+				            <a href="#">
+		            			<i class="fa  fa-fw  fa-credit-card"></i><span>Base Própria</span>
+		            			<i class="aw-menu__navigation-icon  fa"></i>
+	          				</a>
+	      
+	          				<ul class="aw-menu__list  aw-menu__list--sublist">
+				            	<li class="aw-menu__item  aw-menu__item--link" sinapiPRO:menu="@{/vendas.+}">
+				            		<a th:href="@{/vendas/nova}">Sinapi</a>
+				            	</li>
+				            
+				            <li class="aw-menu__item  aw-menu__item--link" sinapiPRO:menu="@{/vendas}">
+				            	<a th:href="@{/vendas}">Base Sinapi</a>
+				            </li>
+			            
+			            </div>
+			        </ul>
+			    </li>
+
+        		<li class="aw-menu__item">
+          			<a href="#">
+            			<i class="fa  fa-fw  fa-truck"></i><span>Estoque</span>
+            			<i class="aw-menu__navigation-icon  fa"></i>
+          			</a>
+      
+          			<ul class="aw-menu__list  aw-menu__list--sublist">
+			            <li class="aw-menu__item  aw-menu__item--link" sinapiPRO:menu="@{/estilos.*}">
+			            	<a th:href="@{/estilos}">Estilos</a>
+			            </li>
+			            <li class="aw-menu__item  aw-menu__item--link" sinapiPRO:menu="@{/cervejas.*}">
+			            	<a th:href="@{/cervejas}">Cervejas</a>
+			            </li>
+          			</ul>
+        		</li>
+
+        		<li class="aw-menu__item">
+          			<a href="#">
+            			<i class="fa  fa-fw  fa-database"></i><span>Cadastros</span>
+            			<i class="aw-menu__navigation-icon  fa"></i>
+          			</a>
+
+          			<ul class="aw-menu__list  aw-menu__list--sublist">
+			            <li class="aw-menu__item  aw-menu__item--link" sinapiPRO:menu="@{/cidades.*}">
+			            	<a th:href="@{/cidades}">Cidades</a>
+			            </li>
+			            <li class="aw-menu__item  aw-menu__item--link" sinapiPRO:menu="@{/clientes.*}">
+			            	<a th:href="@{/clientes}">Clientes</a>
+			            </li>
+			            <li class="aw-menu__item  aw-menu__item--link" sinapiPRO:menu="@{/usuarios.*}">
+			            	<a th:href="@{/usuarios}">Usuários</a>
+			            </li>
+          			</ul>
+        		</li>	
+        		
+        		<li class="aw-menu__item">
+          			<a href="#">
+            			<i class="fa  fa-fw  fa-file-pdf-o"></i><span>Relatórios</span>
+            			<i class="aw-menu__navigation-icon  fa"></i>
+          			</a>
+
+          			<ul class="aw-menu__list  aw-menu__list--sublist">
+			            <li class="aw-menu__item  aw-menu__item--link" sinapiPRO:menu="@{/relatorios.*}">
+			            	<a th:href="@{/relatorios/vendasEmitidas}">Vendas emitidas</a>
+			            </li>
+          			</ul>
+        		</li>
+      		</ul>
+    	</nav>
+	</div>
+</aside>
+</body>
+</html>
