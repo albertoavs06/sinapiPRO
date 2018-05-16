@@ -7,7 +7,7 @@
 	xmlns:data="http://www.thymeleaf.org/extras/data">
 	
 <head>
-	<title>Pesquisa de vendas</title>
+	<title>Pesquisa de orçamentoss</title>
 </head>
 
 <body>
@@ -16,12 +16,12 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-xs-10">
-					<h1>Pesquisa de vendas</h1>
+					<h1>Pesquisa de orçamentos</h1>
 				</div>
 				
 				<div class="col-xs-2">
 					<div class="aw-page-header-controls">
-						<a class="btn  btn-default" th:href="@{/vendas/nova}">
+						<a class="btn  btn-default" th:href="@{/orcamentos/nova}">
 							<i class="glyphicon  glyphicon-plus-sign"></i> <span class="hidden-xs  hidden-sm">Nova venda</span>
 						</a>
 					</div>
@@ -31,7 +31,7 @@
 	</div>
 	
 	<div class="container-fluid">
-		<form method="GET" th:object="${vendaFilter}" th:action="@{/vendas}">
+		<form method="GET" th:object="${vendaFilter}" th:action="@{/orcamentos}">
 			<div class="row">
 				<div class="form-group  col-sm-6">
 					<label class="control-label" for="codigo">Código</label>
@@ -102,23 +102,23 @@
 				</thead>
 				
 	            <tbody>
-					<tr th:each="venda : ${pagina.conteudo}">
-						<td th:text="${venda.codigo}"></td>
-						<td th:text="${venda.cliente.nome}"></td>
-						<td th:text="${{venda.dataCriacao}}"></td>
+					<tr th:each="orcamento : ${pagina.conteudo}">
+						<td th:text="${orcamento.codigo}"></td>
+						<td th:text="${orcamento.cliente.nome}"></td>
+						<td th:text="${{orcamento.dataCriacao}}"></td>
 						<td th:text="|R$ ${{venda.valorTotal}}|"></td>
-						<td th:text="${venda.usuario.nome}"></td>
-						<td th:text="${venda.status.descricao}"></td>
+						<td th:text="${orcamento.usuario.nome}"></td>
+						<td th:text="${orcamento.status.descricao}"></td>
 	                 	<td class="text-center">
 		   					<a class="btn  btn-link  btn-xs  js-tooltip" title="Editar" 
-		   							th:href="@{/vendas/{codigo}(codigo=${venda.codigo})}">
+		   							th:href="@{/orcamentos/{codigo}(codigo=${orcamento.codigo})}">
 		   						<i class="glyphicon glyphicon-pencil"></i>
 		   					</a>
 	                 	</td>
 	                </tr>
 	                
 	                <tr th:if="${pagina.vazia}">
-	                	<td colspan="7">Nenhuma venda encontrada</td>
+	                	<td colspan="7">Nenhum orçamento encontrado</td>
 	                </tr>
 	             </tbody>
 	         </table>

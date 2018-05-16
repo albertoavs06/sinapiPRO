@@ -27,8 +27,8 @@ public class OrcamentoValidator implements Validator {
 		validarValorTotalNegativo(errors, Orcamento);
 	}
 
-	private void validarValorTotalNegativo(Errors errors, Orcamento venda) {
-		if (venda.getValorTotal().compareTo(BigDecimal.ZERO) < 0) {
+	private void validarValorTotalNegativo(Errors errors, Orcamento orcamento) {
+		if (orcamento.getValorTotal().compareTo(BigDecimal.ZERO) < 0) {
 			errors.reject("", "Valor total não pode ser negativo");
 		}
 	}
@@ -39,8 +39,8 @@ public class OrcamentoValidator implements Validator {
 		}
 	}
 
-	private void validarSeInformouApenasHorarioEntrega(Errors errors, Orcamento venda) {
-		if (venda.getHorarioEntrega() != null && venda.getDataEntrega() == null) {
+	private void validarSeInformouApenasHorarioEntrega(Errors errors, Orcamento orcamento) {
+		if (orcamento.getHorarioEntrega() != null && orcamento.getDataEntrega() == null) {
 			errors.rejectValue("dataEntrega", "", "Informe uma data da entrega para um horário");
 		}
 	}

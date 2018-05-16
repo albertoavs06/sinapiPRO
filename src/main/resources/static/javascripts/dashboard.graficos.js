@@ -1,20 +1,20 @@
-var Brewer = Brewer || {};
+var SinapiPRO = SinapiPRO || {};
 
-Brewer.GraficoVendaPorMes = (function() {
+Brewer.GraficoOrcamentoPorMes = (function() {
 	
-	function GraficoVendaPorMes() {
-		this.ctx = $('#graficoVendasPorMes')[0].getContext('2d');
+	function GraficoOrcamentoPorMes() {
+		this.ctx = $('#graficoOrcamentosPorMes')[0].getContext('2d');
 	}
 	
-	GraficoVendaPorMes.prototype.iniciar = function() {
+	GraficoOrcamentoPorMes.prototype.iniciar = function() {
 		$.ajax({
-			url: 'vendas/totalPorMes',
+			url: 'orcamentos/totalPorMes',
 			method: 'GET', 
 			success: onDadosRecebidos.bind(this)
 		});
 	}
 	
-	function onDadosRecebidos(vendaMes) {
+	function onDadosRecebidos(orcamentoMes) {
 		var meses = [];
 		var valores = [];
 		vendaMes.forEach(function(obj) {
@@ -22,7 +22,7 @@ Brewer.GraficoVendaPorMes = (function() {
 			valores.unshift(obj.total);
 		});
 		
-		var graficoVendasPorMes = new Chart(this.ctx, {
+		var graficoOrcamentosPorMes = new Chart(this.ctx, {
 		    type: 'line',
 		    data: {
 		    	labels: meses,
@@ -37,19 +37,19 @@ Brewer.GraficoVendaPorMes = (function() {
 		});
 	}
 	
-	return GraficoVendaPorMes;
+	return GraficoOrcamentoPorMes;
 	
 }());
 
-Brewer.GraficoVendaPorOrigem = (function() {
+SinapiPRO.GraficoOrcamentoPorOrigem = (function() {
 	
-	function GraficoVendaPorOrigem() {
-		this.ctx = $('#graficoVendasPorOrigem')[0].getContext('2d');
+	function GraficoOrcamentoPorOrigem() {
+		this.ctx = $('#graficoOrcamentosPorOrigem')[0].getContext('2d');
 	}
 	
 	GraficoVendaPorOrigem.prototype.iniciar = function() {
 		$.ajax({
-			url: 'vendas/porOrigem',
+			url: 'orcamentos/porOrigem',
 			method: 'GET', 
 			success: onDadosRecebidos.bind(this)
 		});
@@ -66,7 +66,7 @@ Brewer.GraficoVendaPorOrigem = (function() {
 			cervejasInternacionais.unshift(obj.totalInternacional)
 		});
 		
-		var graficoVendasPorOrigem = new Chart(this.ctx, {
+		var graficoOrcamentosPorOrigem = new Chart(this.ctx, {
 		    type: 'bar',
 		    data: {
 		    	labels: meses,
@@ -90,9 +90,9 @@ Brewer.GraficoVendaPorOrigem = (function() {
 
 
 $(function() {
-	var graficoVendaPorMes = new Brewer.GraficoVendaPorMes();
+	var graficoOrcamentoPorMes = new SinapiPRO.GraficoVendaPorMes();
 	graficoVendaPorMes.iniciar();
 	
-	var graficoVendaPorOrigem = new Brewer.GraficoVendaPorOrigem();
+	var graficoOrcamentoPorOrigem = new SinapiPRO.GraficoVendaPorOrigem();
 	graficoVendaPorOrigem.iniciar();
 });

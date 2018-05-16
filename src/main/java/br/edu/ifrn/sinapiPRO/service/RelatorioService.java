@@ -26,7 +26,7 @@ public class RelatorioService {
 	@Autowired
 	private DataSource dataSource;
 	
-	public byte[] gerarRelatorioVendasEmitidas(PeriodoRelatorio periodoRelatorio) throws Exception {
+	public byte[] gerarRelatorioOrcamentosEmitidos(PeriodoRelatorio periodoRelatorio) throws Exception {
 		Date dataInicio = Date.from(LocalDateTime.of(periodoRelatorio.getDataInicio(), LocalTime.of(0, 0, 0))
 				.atZone(ZoneId.systemDefault()).toInstant());
 		Date dataFim = Date.from(LocalDateTime.of(periodoRelatorio.getDataFim(), LocalTime.of(23, 59, 59))
@@ -38,7 +38,7 @@ public class RelatorioService {
 		parametros.put("data_fim", dataFim);
 		
 		InputStream inputStream = this.getClass()
-				.getResourceAsStream("/relatorios/relatorio_vendas_emitidas.jasper");
+				.getResourceAsStream("/relatorios/relatorio_orcamentos_emitidos.jasper");
 		
 		Connection con = this.dataSource.getConnection();
 		

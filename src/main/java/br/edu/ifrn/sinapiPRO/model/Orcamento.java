@@ -60,7 +60,7 @@ public class Orcamento {
 	private Usuario usuario;
 
 	@Enumerated(EnumType.STRING)
-	private StatusVenda status = StatusVenda.ORCAMENTO;
+	private StatusOrcamento status = StatusOrcamento.ORCAMENTO;
 
 	@OneToMany(mappedBy = "orcamento", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ItemOrcamento> itens = new ArrayList<>();
@@ -146,11 +146,11 @@ public class Orcamento {
 		this.usuario = usuario;
 	}
 
-	public StatusVenda getStatus() {
+	public StatusOrcamento getStatus() {
 		return status;
 	}
 
-	public void setStatus(StatusVenda status) {
+	public void setStatus(StatusOrcamento status) {
 		this.status = status;
 	}
 
@@ -212,7 +212,7 @@ public class Orcamento {
 	}
 	
 	public boolean isSalvarPermitido() {
-		return !status.equals(StatusVenda.CANCELADA);
+		return !status.equals(StatusOrcamento.CANCELADA);
 	}
 	
 	public boolean isSalvarProibido() {

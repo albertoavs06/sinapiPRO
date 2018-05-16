@@ -20,16 +20,16 @@ public class RelatoriosController {
 	@Autowired
 	private RelatorioService relatorioService;
 	
-	@GetMapping("/vendasEmitidas")
-	public ModelAndView relatorioVendasEmitidas() {
-		ModelAndView mv = new ModelAndView("relatorio/RelatorioVendasEmitidas");
+	@GetMapping("/orcamentosEmitidos")
+	public ModelAndView relatorioOrcamentosEmitidos() {
+		ModelAndView mv = new ModelAndView("relatorio/RelatorioOrcamentosEmitidos");
 		mv.addObject(new PeriodoRelatorio());
 		return mv;
 	}
 	
-	@PostMapping("/vendasEmitidas")
-	public ResponseEntity<byte[]> gerarRelatorioVendasEmitidas(PeriodoRelatorio periodoRelatorio) throws Exception {
-		byte[] relatorio = relatorioService.gerarRelatorioVendasEmitidas(periodoRelatorio); 
+	@PostMapping("/orcamentosEmitidas")
+	public ResponseEntity<byte[]> gerarRelatorioOrcamentoEmitidas(PeriodoRelatorio periodoRelatorio) throws Exception {
+		byte[] relatorio = relatorioService.gerarRelatorioOrcamentoEmitidos(periodoRelatorio); 
 		
 		return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_PDF_VALUE)

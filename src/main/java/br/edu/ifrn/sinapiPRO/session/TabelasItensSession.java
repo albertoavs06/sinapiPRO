@@ -8,31 +8,31 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
 import br.edu.ifrn.sinapiPRO.model.Cerveja;
-import br.edu.ifrn.sinapiPRO.model.ItemVenda;
+import br.edu.ifrn.sinapiPRO.model.ItemOrcamento;
 
 @SessionScope
 @Component
 public class TabelasItensSession {
 
-	private Set<TabelaItensVenda> tabelas = new HashSet<>();
+	private Set<TabelaItensOrcamento> tabelas = new HashSet<>();
 
 	public void adicionarItem(String uuid, Cerveja cerveja, int quantidade) {
-		TabelaItensVenda tabela = buscarTabelaPorUuid(uuid);
+		TabelaItensOrcamento tabela = buscarTabelaPorUuid(uuid);
 		tabela.adicionarItem(cerveja, quantidade);
 		tabelas.add(tabela);
 	}
 
 	public void alterarQuantidadeItens(String uuid, Cerveja cerveja, Integer quantidade) {
-		TabelaItensVenda tabela = buscarTabelaPorUuid(uuid);
+		TabelaItensOrcamento tabela = buscarTabelaPorUuid(uuid);
 		tabela.alterarQuantidadeItens(cerveja, quantidade);
 	}
 
 	public void excluirItem(String uuid, Cerveja cerveja) {
-		TabelaItensVenda tabela = buscarTabelaPorUuid(uuid);
+		TabelaItensOrcamento tabela = buscarTabelaPorUuid(uuid);
 		tabela.excluirItem(cerveja);
 	}
 
-	public List<ItemVenda> getItens(String uuid) {
+	public List<ItemOrcamento> getItens(String uuid) {
 		return buscarTabelaPorUuid(uuid).getItens();
 	}
 	
@@ -40,11 +40,11 @@ public class TabelasItensSession {
 		return buscarTabelaPorUuid(uuid).getValorTotal();
 	}
 	
-	private TabelaItensVenda buscarTabelaPorUuid(String uuid) {
-		TabelaItensVenda tabela = tabelas.stream()
+	private TabelaItensOrcamento buscarTabelaPorUuid(String uuid) {
+		TabelaItensOrcamento tabela = tabelas.stream()
 				.filter(t -> t.getUuid().equals(uuid))
 				.findAny()
-				.orElse(new TabelaItensVenda(uuid));
+				.orElse(new TabelaItensOrcamento(uuid));
 		return tabela;
 	}
 

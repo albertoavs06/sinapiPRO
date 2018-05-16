@@ -7,7 +7,7 @@
 	xmlns:data="http://www.thymeleaf.org/extras/data">
 
 <head>
-	<title>Cadastro de venda</title>
+	<title>Cadastro do orçamento</title>
 	
 	<link rel="stylesheet" th:href="@{/stylesheets/vendors/easy-autocomplete.min.css}"/>
 	<link rel="stylesheet" th:href="@{/stylesheets/vendors/easy-autocomplete.themes.min.css}"/>
@@ -19,15 +19,15 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-xs-10">
-					<h1 th:if="${venda.nova}" th:text="#{venda.cadastro.titulo}">Cadastro de venda</h1>
-					<h1 th:unless="${venda.nova}" th:text="#{venda.edicao.titulo(${venda.codigo})}">Edição da venda nº </h1>
+					<h1 th:if="${orcamento.nova}" th:text="#{orcamento.cadastro.titulo}">Cadastro de venda</h1>
+					<h1 th:unless="${venda.nova}" th:text="#{orcamento.edicao.titulo(${orcamento.codigo})}">Edição do orçamento nº </h1>
 				</div>
 			</div>
 		</div>
 	</div>
 	
 	<div class="container-fluid">
-		<form method="POST" th:action="@{/vendas/nova}" th:object="${venda}" class="js-formulario-principal">
+		<form method="POST" th:action="@{/orcamentos/nova}" th:object="${venda}" class="js-formulario-principal">
 			<sinapiPRO:message/>
 		
 			<input type="hidden" id="uuid" th:field="*{uuid}"/>
@@ -40,7 +40,7 @@
 						<div class="aw-box__icon">
 							<i class="fa  fa-usd  fa-3x"></i>
 						</div>
-						<div class="aw-box__value">R$<span class="js-valor-total-box" th:text="${{venda.valorTotal}}">0,00</span></div>
+						<div class="aw-box__value">R$<span class="js-valor-total-box" th:text="${{orcamento.valorTotal}}">0,00</span></div>
 						<div class="aw-box__title">Total</div>
 					</div>
 				</div>
@@ -63,7 +63,7 @@
 						<div class="aw-box__value">
 							<span class="js-tooltip" th:if="${venda.diasCriacao == 0}">Hoje</span>
 							<span class="js-tooltip" th:if="${venda.diasCriacao == 1}">Há 1 dia</span>
-							<span class="js-tooltip" th:if="${venda.diasCriacao > 1}">Há [[${venda.diasCriacao}]] dias</span>
+							<span class="js-tooltip" th:if="${venda.diasCriacao > 1}">Há [[${orcamento.diasCriacao}]] dias</span>
 						</div>
 						<div class="aw-box__title">Criação</div>
 					</div>
@@ -166,7 +166,7 @@
 					  </ul>
 					</div>
 				
-					<button class="btn  btn-danger  js-submit-btn" data:acao="cancelar" th:unless="${venda.nova}">Cancelar</button>
+					<button class="btn  btn-danger  js-submit-btn" data:acao="cancelar" th:unless="${orcamento.nova}">Cancelar</button>
 				</div>
 			</div>
 		</form>
@@ -180,13 +180,13 @@
 	<script th:src="@{/javascripts/vendors/jquery.easy-autocomplete.min.js}"></script>
 	<script th:src="@{/javascripts/vendors/handlebars.min.js}"></script>
 	<script th:src="@{/javascripts/cliente.pesquisa-rapida.js}"></script>
-	<script th:src="@{/javascripts/venda.autocomplete-itens.js}"></script>
-	<script th:src="@{/javascripts/venda.tabela-itens.js}"></script>
-	<script th:src="@{/javascripts/venda.js}"></script>
-	<script th:src="@{/javascripts/venda.botoes-submit.js}"></script>
+	<script th:src="@{/javascripts/orcamento.autocomplete-itens.js}"></script>
+	<script th:src="@{/javascripts/orcamento.tabela-itens.js}"></script>
+	<script th:src="@{/javascripts/orcamento.js}"></script>
+	<script th:src="@{/javascripts/orcamento.botoes-submit.js}"></script>
 	<script>
 	$(function() {
-		$('.js-abas-venda a').click(function (e) {
+		$('.js-abas-orcamento a').click(function (e) {
 			e.preventDefault();
 			$(this).tab('show');
 		});

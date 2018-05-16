@@ -1,16 +1,16 @@
 package br.edu.ifrn.sinapiPRO.dto;
 
-public class VendaOrigem {
+public class OrcamentoOrigem {
 
 	private String mes;
 	private Integer totalNacional;
 	private Integer totalInternacional;
 	
-	public VendaOrigem() {
+	public OrcamentoOrigem() {
 		
 	}
 
-	public VendaOrigem(String mes, Integer totalNacional, Integer totalInternacional) {
+	public OrcamentoOrigem(String mes, Integer totalNacional, Integer totalInternacional) {
 		this.mes = mes;
 		this.totalNacional = totalNacional;
 		this.totalInternacional = totalInternacional;

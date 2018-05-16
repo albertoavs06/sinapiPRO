@@ -1,6 +1,6 @@
-Brewer.Venda = (function() {
+SinapiPRO.Orcamento = (function() {
 	
-	function Venda(tabelaItens) {
+	function Orcamento(tabelaItens) {
 		this.tabelaItens = tabelaItens;
 		this.valorTotalBox = $('.js-valor-total-box');
 		this.valorFreteInput = $('#valorFrete');
@@ -12,7 +12,7 @@ Brewer.Venda = (function() {
 		this.valorDesconto = this.valorDescontoInput.data('valor');
 	}
 	
-	Venda.prototype.iniciar = function() {
+	Orcamento.prototype.iniciar = function() {
 		this.tabelaItens.on('tabela-itens-atualizada', onTabelaItensAtualizada.bind(this));
 		this.valorFreteInput.on('keyup', onValorFreteAlterado.bind(this));
 		this.valorDescontoInput.on('keyup', onValorDescontoAlterado.bind(this));
@@ -29,33 +29,33 @@ Brewer.Venda = (function() {
 	}
 	
 	function onValorFreteAlterado(evento) {
-		this.valorFrete = Brewer.recuperarValor($(evento.target).val());
+		this.valorFrete = SinapiPRO.recuperarValor($(evento.target).val());
 	}
 	
 	function onValorDescontoAlterado(evento) {
-		this.valorDesconto = Brewer.recuperarValor($(evento.target).val());
+		this.valorDesconto = SinapiPRO.recuperarValor($(evento.target).val());
 	}
 	
 	function onValoresAlterados() {
 		var valorTotal = numeral(this.valorTotalItens) + numeral(this.valorFrete) - numeral(this.valorDesconto);
-		this.valorTotalBox.html(Brewer.formatarMoeda(valorTotal));
+		this.valorTotalBox.html(SinapiPRO.formatarMoeda(valorTotal));
 		
 		this.valorTotalBoxContainer.toggleClass('negativo', valorTotal < 0);
 	}
 	
-	return Venda;
+	return Orcamento;
 	
 }());
 
 $(function() {
 	
-	var autocomplete = new Brewer.Autocomplete();
+	var autocomplete = new SinapiPRO.Autocomplete();
 	autocomplete.iniciar();
 	
-	var tabelaItens = new Brewer.TabelaItens(autocomplete);
+	var tabelaItens = new SinapiPRO.TabelaItens(autocomplete);
 	tabelaItens.iniciar();
 	
-	var venda = new Brewer.Venda(tabelaItens);
-	venda.iniciar();
+	var orcamento = new SinapiPRO.Orcamento(tabelaItens);
+	orcamento.iniciar();
 	
 });

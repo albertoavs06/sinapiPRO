@@ -1,6 +1,6 @@
 package br.edu.ifrn.sinapiPRO.model;
 
-public enum StatusVenda {
+public enum StatusOrcamento {
 
 	ORCAMENTO("Orçamento"), 
 	EMITIDA("Emitida"), 
@@ -8,7 +8,7 @@ public enum StatusVenda {
 
 	private String descricao;
 
-	StatusVenda(String descricao) {
+	StatusOrcamento(String descricao) {
 		this.descricao = descricao;
 	}
 

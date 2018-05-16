@@ -1,14 +1,14 @@
 package br.edu.ifrn.sinapiPRO.dto;
 
-public class VendaMes {
+public class OrcamentoMes {
 
 	private String mes;
 	private Integer total;
 
-	public VendaMes() {
+	public OrcamentoMes() {
 	}
 
-	public VendaMes(String mes, Integer total) {
+	public OrcamentoMes(String mes, Integer total) {
 		this.mes = mes;
 		this.total = total;
 	}

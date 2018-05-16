@@ -28,12 +28,10 @@ public class CadastroCervejaService {
 	@Transactional
 	public void excluir(Cerveja cerveja) {
 		try {
-			String foto = cerveja.getFoto();
 			cervejas.delete(cerveja);
 			cervejas.flush();
-			fotoStorage.excluir(foto);
 		} catch (PersistenceException e) {
-			throw new ImpossivelExcluirEntidadeException("Impossível apagar cerveja. Já foi usada em alguma venda.");
+			throw new ImpossivelExcluirEntidadeException("Impossível apagar Composição. Já foi usada em algum orçamento.");
 		}
 	}
 	

@@ -3,12 +3,12 @@ package br.edu.ifrn.sinapiPRO.repository.filter;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import br.edu.ifrn.sinapiPRO.model.StatusVenda;
+import br.edu.ifrn.sinapiPRO.model.StatusOrcamento;
 
-public class VendaFilter {
+public class OrcamentoFilter {
 
 	private Long codigo;
-	private StatusVenda status;
+	private StatusOrcamento status;
 
 	private LocalDate desde;
 	private LocalDate ate;
@@ -26,11 +26,11 @@ public class VendaFilter {
 		this.codigo = codigo;
 	}
 
-	public StatusVenda getStatus() {
+	public StatusOrcamento getStatus() {
 		return status;
 	}
 
-	public void setStatus(StatusVenda status) {
+	public void setStatus(StatusOrcamento status) {
 		this.status = status;
 	}
 

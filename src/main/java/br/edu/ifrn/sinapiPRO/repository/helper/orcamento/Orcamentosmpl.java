@@ -1,4 +1,4 @@
-package br.edu.ifrn.sinapiPRO.repository.helper.venda;
+package br.edu.ifrn.sinapiPRO.repository.helper.orcamento;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -25,15 +25,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import br.edu.ifrn.sinapiPRO.dto.VendaMes;
-import br.edu.ifrn.sinapiPRO.dto.VendaOrigem;
-import br.edu.ifrn.sinapiPRO.model.StatusVenda;
+import br.edu.ifrn.sinapiPRO.dto.OrcamentoMes;
+import br.edu.ifrn.sinapiPRO.dto.OrcamentoOrigem;
+import br.edu.ifrn.sinapiPRO.model.StatusOrcamento;
 import br.edu.ifrn.sinapiPRO.model.TipoPessoa;
-import br.edu.ifrn.sinapiPRO.model.Venda;
-import br.edu.ifrn.sinapiPRO.repository.filter.VendaFilter;
+import br.edu.ifrn.sinapiPRO.model.Orcamento;
+import br.edu.ifrn.sinapiPRO.repository.filter.OrcamentoFilter;
 import br.edu.ifrn.sinapiPRO.repository.paginacao.PaginacaoUtil;
 
-public class VendasImpl implements VendasQueries {
+public class Orcamentosmpl implements OrcamentosQueries {
 
 	@PersistenceContext
 	private EntityManager manager;
@@ -44,8 +44,8 @@ public class VendasImpl implements VendasQueries {
 	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = true)
 	@Override
-	public Page<Venda> filtrar(VendaFilter filtro, Pageable pageable) {
-		Criteria criteria = manager.unwrap(Session.class).createCriteria(Venda.class);
+	public Page<Orcamento> filtrar(OrcamentoFilter filtro, Pageable pageable) {
+		Criteria criteria = manager.unwrap(Session.class).createCriteria(Orcamento.class);
 		paginacaoUtil.preparar(criteria, pageable);
 		adicionarFiltro(filtro, criteria);
 		
@@ -54,20 +54,20 @@ public class VendasImpl implements VendasQueries {
 	
 	@Transactional(readOnly = true)
 	@Override
-	public Venda buscarComItens(Long codigo) {
-		Criteria criteria = manager.unwrap(Session.class).createCriteria(Venda.class);
+	public Orcamento buscarComItens(Long codigo) {
+		Criteria criteria = manager.unwrap(Session.class).createCriteria(Orcamento.class);
 		criteria.createAlias("itens", "i", JoinType.LEFT_OUTER_JOIN);
 		criteria.add(Restrictions.eq("codigo", codigo));
 		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-		return (Venda) criteria.uniqueResult();
+		return (Orcamento) criteria.uniqueResult();
 	}
 	
 	@Override
 	public BigDecimal valorTotalNoAno() {
 		Optional<BigDecimal> optional = Optional.ofNullable(
-				manager.createQuery("select sum(valorTotal) from Venda where year(dataCriacao) = :ano and status = :status", BigDecimal.class)
+				manager.createQuery("select sum(valorTotal) from Orcamento where year(dataCriacao) = :ano and status = :status", BigDecimal.class)
 					.setParameter("ano", Year.now().getValue())
-					.setParameter("status", StatusVenda.EMITIDA)
+					.setParameter("status", StatusOrcamento.EMITIDA)
 					.getSingleResult());
 		return optional.orElse(BigDecimal.ZERO);
 	}
@@ -75,9 +75,9 @@ public class VendasImpl implements VendasQueries {
 	@Override
 	public BigDecimal valorTotalNoMes() {
 		Optional<BigDecimal> optional = Optional.ofNullable(
-				manager.createQuery("select sum(valorTotal) from Venda where month(dataCriacao) = :mes and status = :status", BigDecimal.class)
+				manager.createQuery("select sum(valorTotal) from Orcamento where month(dataCriacao) = :mes and status = :status", BigDecimal.class)
 					.setParameter("mes", MonthDay.now().getMonthValue())
-					.setParameter("status", StatusVenda.EMITIDA)
+					.setParameter("status", StatusOrcamento.EMITIDA)
 					.getSingleResult());
 		return optional.orElse(BigDecimal.ZERO);
 	}
@@ -85,60 +85,60 @@ public class VendasImpl implements VendasQueries {
 	@Override
 	public BigDecimal valorTicketMedioNoAno() {
 		Optional<BigDecimal> optional = Optional.ofNullable(
-				manager.createQuery("select sum(valorTotal)/count(*) from Venda where year(dataCriacao) = :ano and status = :status", BigDecimal.class)
+				manager.createQuery("select sum(valorTotal)/count(*) from Orcamento where year(dataCriacao) = :ano and status = :status", BigDecimal.class)
 					.setParameter("ano", Year.now().getValue())
-					.setParameter("status", StatusVenda.EMITIDA)
+					.setParameter("status", StatusOrcamento.EMITIDA)
 					.getSingleResult());
 		return optional.orElse(BigDecimal.ZERO);
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<VendaMes> totalPorMes() {
-		List<VendaMes> vendasMes = manager.createNamedQuery("Vendas.totalPorMes").getResultList();
+	public List<OrcamentoMes> totalPorMes() {
+		List<OrcamentoMes> orcamentosMes = manager.createNamedQuery("Orcamentos.totalPorMes").getResultList();
 		
 		LocalDate hoje = LocalDate.now();
 		for (int i = 1; i <= 6; i++) {
 			String mesIdeal = String.format("%d/%02d", hoje.getYear(), hoje.getMonthValue());
 			
-			boolean possuiMes = vendasMes.stream().filter(v -> v.getMes().equals(mesIdeal)).findAny().isPresent();
+			boolean possuiMes = orcamentosMes.stream().filter(v -> v.getMes().equals(mesIdeal)).findAny().isPresent();
 			if (!possuiMes) {
-				vendasMes.add(i - 1, new VendaMes(mesIdeal, 0));
+				orcamentosMes.add(i - 1, new OrcamentoMes(mesIdeal, 0));
 			}
 			
 			hoje = hoje.minusMonths(1);
 		}
 		
-		return vendasMes;
+		return orcamentosMes;
 	}
 	
 	@Override
-	public List<VendaOrigem> totalPorOrigem() {
-		List<VendaOrigem> vendasNacionalidade = manager.createNamedQuery("Vendas.porOrigem", VendaOrigem.class).getResultList();
+	public List<OrcamentoOrigem> totalPorOrigem() {
+		List<OrcamentoOrigem> orcamentosNacionalidade = manager.createNamedQuery("Orcamentos.porOrigem", OrcamentoOrigem.class).getResultList();
 		
 		LocalDate now = LocalDate.now();
 		for (int i = 1; i <= 6; i++) {
 			String mesIdeal = String.format("%d/%02d", now.getYear(), now.getMonth().getValue());
 			
-			boolean possuiMes = vendasNacionalidade.stream().filter(v -> v.getMes().equals(mesIdeal)).findAny().isPresent();
+			boolean possuiMes = orcamentosNacionalidade.stream().filter(v -> v.getMes().equals(mesIdeal)).findAny().isPresent();
 			if (!possuiMes) {
-				vendasNacionalidade.add(i - 1, new VendaOrigem(mesIdeal, 0, 0));
+				orcamentosNacionalidade.add(i - 1, new OrcamentoOrigem(mesIdeal, 0, 0));
 			}
 			
 			now = now.minusMonths(1);
 		}
 		
-		return vendasNacionalidade;
+		return orcamentosNacionalidade;
 	}
 	
-	private Long total(VendaFilter filtro) {
-		Criteria criteria = manager.unwrap(Session.class).createCriteria(Venda.class);
+	private Long total(OrcamentoFilter filtro) {
+		Criteria criteria = manager.unwrap(Session.class).createCriteria(Orcamento.class);
 		adicionarFiltro(filtro, criteria);
 		criteria.setProjection(Projections.rowCount());
 		return (Long) criteria.uniqueResult();
 	}
 	
-	private void adicionarFiltro(VendaFilter filtro, Criteria criteria) {
+	private void adicionarFiltro(OrcamentoFilter filtro, Criteria criteria) {
 		criteria.createAlias("cliente", "c");
 		
 		if (filtro != null) {

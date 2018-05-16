@@ -7,43 +7,43 @@ import java.util.Optional;
 import java.util.stream.IntStream;
 
 import br.edu.ifrn.sinapiPRO.model.Cerveja;
-import br.edu.ifrn.sinapiPRO.model.ItemVenda;
+import br.edu.ifrn.sinapiPRO.model.ItemOrcamento;
 
-class TabelaItensVenda {
+class TabelaItensOrcamento {
 
 	private String uuid;
-	private List<ItemVenda> itens = new ArrayList<>();
+	private List<ItemOrcamento> itens = new ArrayList<>();
 	
-	public TabelaItensVenda(String uuid) {
+	public TabelaItensOrcamento(String uuid) {
 		this.uuid = uuid;
 	}
 
 	public BigDecimal getValorTotal() {
 		return itens.stream()
-				.map(ItemVenda::getValorTotal)
+				.map(ItemOrcamento::getValorTotal)
 				.reduce(BigDecimal::add)
 				.orElse(BigDecimal.ZERO);
 	}
 	
 	public void adicionarItem(Cerveja cerveja, Integer quantidade) {
-		Optional<ItemVenda> itemVendaOptional = buscarItemPorCerveja(cerveja);
+		Optional<ItemOrcamento> itemOrcamentoOptional = buscarItemPorCerveja(cerveja);
 		
-		ItemVenda itemVenda = null;
-		if (itemVendaOptional.isPresent()) {
-			itemVenda = itemVendaOptional.get();
-			itemVenda.setQuantidade(itemVenda.getQuantidade() + quantidade);
+		ItemOrcamento itemOrcamento = null;
+		if (itemOrcamentoOptional.isPresent()) {
+			itemOrcamento = itemOrcamentoOptional.get();
+			itemOrcamento.setQuantidade(itemOrcamento.getQuantidade() + quantidade);
 		} else {
-			itemVenda = new ItemVenda();
-			itemVenda.setCerveja(cerveja);
-			itemVenda.setQuantidade(quantidade);
-			itemVenda.setValorUnitario(cerveja.getValor());
-			itens.add(0, itemVenda);
+			itemOrcamento = new ItemOrcamento();
+			itemOrcamento.setCerveja(cerveja);
+			itemOrcamento.setQuantidade(quantidade);
+			itemOrcamento.setValorUnitario(cerveja.getValor());
+			itens.add(0, itemOrcamento);
 		}
 	}
 	
 	public void alterarQuantidadeItens(Cerveja cerveja, Integer quantidade) {
-		ItemVenda itemVenda = buscarItemPorCerveja(cerveja).get();
-		itemVenda.setQuantidade(quantidade);
+		ItemOrcamento itemOrcamento = buscarItemPorCerveja(cerveja).get();
+		itemOrcamento.setQuantidade(quantidade);
 	}
 	
 	public void excluirItem(Cerveja cerveja) {
@@ -57,11 +57,11 @@ class TabelaItensVenda {
 		return itens.size();
 	}
 
-	public List<ItemVenda> getItens() {
+	public List<ItemOrcamento> getItens() {
 		return itens;
 	}
 	
-	private Optional<ItemVenda> buscarItemPorCerveja(Cerveja cerveja) {
+	private Optional<ItemOrcamento> buscarItemPorCerveja(Cerveja cerveja) {
 		return itens.stream()
 				.filter(i -> i.getCerveja().equals(cerveja))
 				.findAny();
@@ -87,7 +87,7 @@ class TabelaItensVenda {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		TabelaItensVenda other = (TabelaItensVenda) obj;
+		TabelaItensOrcamento other = (TabelaItensOrcamento) obj;
 		if (uuid == null) {
 			if (other.uuid != null)
 				return false;

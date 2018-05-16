@@ -5,19 +5,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.edu.ifrn.sinapiPRO.repository.Cervejas;
 import br.edu.ifrn.sinapiPRO.repository.Clientes;
-import br.edu.ifrn.sinapiPRO.repository.Vendas;
+import br.edu.ifrn.sinapiPRO.repository.Orcamentos;
 
 @Controller
 public class DashboardController {
 
 	@Autowired
-	private Vendas vendas;
-	
-	@Autowired
-	private Cervejas cervejas;
-	
+	private Orcamentos orcamentos;
+	 
 	@Autowired
 	private Clientes clientes;
 	
@@ -25,11 +21,9 @@ public class DashboardController {
 	public ModelAndView dashboard() {
 		ModelAndView mv = new ModelAndView("Dashboard");
 		
-		mv.addObject("vendasNoAno", vendas.valorTotalNoAno());
-		mv.addObject("vendasNoMes", vendas.valorTotalNoMes());
-		mv.addObject("ticketMedio", vendas.valorTicketMedioNoAno());
-		
-		mv.addObject("valorItensEstoque", cervejas.valorItensEstoque());
+		mv.addObject("orcamentosNoAno", orcamentos.valorTotalNoAno());
+		mv.addObject("orcamentosNoMes", orcamentos.valorTotalNoMes());
+		mv.addObject("ticketMedio", orcamentos.valorTicketMedioNoAno());
 		mv.addObject("totalClientes", clientes.count());
 		
 		return mv;

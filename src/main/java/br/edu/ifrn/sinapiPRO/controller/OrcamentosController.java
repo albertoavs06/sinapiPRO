@@ -24,20 +24,20 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.edu.ifrn.sinapiPRO.controller.page.PageWrapper;
-import br.edu.ifrn.sinapiPRO.controller.validator.VendaValidator;
-import br.edu.ifrn.sinapiPRO.dto.VendaMes;
-import br.edu.ifrn.sinapiPRO.dto.VendaOrigem;
+import br.edu.ifrn.sinapiPRO.controller.validator.OrcamentoValidator;
+import br.edu.ifrn.sinapiPRO.dto.OrcamentoMes;
+import br.edu.ifrn.sinapiPRO.dto.OrcamentoOrigem;
 import br.edu.ifrn.sinapiPRO.mail.Mailer;
 import br.edu.ifrn.sinapiPRO.model.Cerveja;
-import br.edu.ifrn.sinapiPRO.model.ItemVenda;
-import br.edu.ifrn.sinapiPRO.model.StatusVenda;
+import br.edu.ifrn.sinapiPRO.model.ItemOrcamento;
+import br.edu.ifrn.sinapiPRO.model.StatusOrcamento;
 import br.edu.ifrn.sinapiPRO.model.TipoPessoa;
-import br.edu.ifrn.sinapiPRO.model.Venda;
+import br.edu.ifrn.sinapiPRO.model.Orcamento;
 import br.edu.ifrn.sinapiPRO.repository.Cervejas;
-import br.edu.ifrn.sinapiPRO.repository.Vendas;
-import br.edu.ifrn.sinapiPRO.repository.filter.VendaFilter;
+import br.edu.ifrn.sinapiPRO.repository.Orcamentos;
+import br.edu.ifrn.sinapiPRO.repository.filter.OrcamentoFilter;
 import br.edu.ifrn.sinapiPRO.security.UsuarioSistema;
-import br.edu.ifrn.sinapiPRO.service.CadastroVendaService;
+import br.edu.ifrn.sinapiPRO.service.CadastroOrcamentoService;
 import br.edu.ifrn.sinapiPRO.session.TabelasItensSession;
 
 @Controller
@@ -51,104 +51,104 @@ public class OrcamentosController {
 	private TabelasItensSession tabelaItens;
 	
 	@Autowired
-	private CadastroVendaService cadastroVendaService;
+	private CadastroOrcamentoService cadastroOrcamentoService;
 	
 	@Autowired
-	private VendaValidator vendaValidator;
+	private OrcamentoValidator orcamentoValidator;
 	
 	@Autowired
-	private Vendas vendas;
+	private Orcamento orcamentos;
 	
 	@Autowired
 	private Mailer mailer;
 	
 	@GetMapping("/nova")
-	public ModelAndView nova(Venda venda) {
-		ModelAndView mv = new ModelAndView("venda/CadastroVenda");
+	public ModelAndView nova(Orcamento orcamento) {
+		ModelAndView mv = new ModelAndView("orcamento/CadastroOrcamento");
 		
-		setUuid(venda);
+		setUuid(orcamento);
 		
-		mv.addObject("itens", venda.getItens());
-		mv.addObject("valorFrete", venda.getValorFrete());
-		mv.addObject("valorDesconto", venda.getValorDesconto());
-		mv.addObject("valorTotalItens", tabelaItens.getValorTotal(venda.getUuid()));
+		mv.addObject("itens", orcamento.getItens());
+		mv.addObject("valorFrete", orcamento.getValorFrete());
+		mv.addObject("valorDesconto", orcamento.getValorDesconto());
+		mv.addObject("valorTotalItens", tabelaItens.getValorTotal(orcamento.getUuid()));
 		
 		return mv;
 	}
 	
 	@PostMapping(value = "/nova", params = "salvar")
-	public ModelAndView salvar(Venda venda, BindingResult result, RedirectAttributes attributes, @AuthenticationPrincipal UsuarioSistema usuarioSistema) {
-		validarVenda(venda, result);
+	public ModelAndView salvar(Orcamento orcamento, BindingResult result, RedirectAttributes attributes, @AuthenticationPrincipal UsuarioSistema usuarioSistema) {
+		validarOrcamento(orcamento, result);
 		if (result.hasErrors()) {
-			return nova(venda);
+			return nova(orcamento);
 		}
 		
-		venda.setUsuario(usuarioSistema.getUsuario());
+		orcamento.setUsuario(usuarioSistema.getUsuario());
 		
-		cadastroVendaService.salvar(venda);
-		attributes.addFlashAttribute("mensagem", "Venda salva com sucesso");
-		return new ModelAndView("redirect:/vendas/nova");
+		cadastroOrcamentoService.salvar(orcamento);
+		attributes.addFlashAttribute("mensagem", "Orcamento salvo com sucesso");
+		return new ModelAndView("redirect:/orcamentos/nova");
 	}
 
 	@PostMapping(value = "/nova", params = "emitir")
-	public ModelAndView emitir(Venda venda, BindingResult result, RedirectAttributes attributes, @AuthenticationPrincipal UsuarioSistema usuarioSistema) {
-		validarVenda(venda, result);
+	public ModelAndView emitir(Orcamento orcamento, BindingResult result, RedirectAttributes attributes, @AuthenticationPrincipal UsuarioSistema usuarioSistema) {
+		validarOrcamento(orcamento, result);
 		if (result.hasErrors()) {
-			return nova(venda);
+			return nova(orcamento);
 		}
 		
-		venda.setUsuario(usuarioSistema.getUsuario());
+		orcamento.setUsuario(usuarioSistema.getUsuario());
 		
-		cadastroVendaService.emitir(venda);
-		attributes.addFlashAttribute("mensagem", "Venda emitida com sucesso");
-		return new ModelAndView("redirect:/vendas/nova");
+		cadastroOrcamentoService.emitir(orcamento);
+		attributes.addFlashAttribute("mensagem", "Orçamento emitido com sucesso");
+		return new ModelAndView("redirect:/orcamentos/nova");
 	}
 	
 	@PostMapping(value = "/nova", params = "enviarEmail")
-	public ModelAndView enviarEmail(Venda venda, BindingResult result, RedirectAttributes attributes, @AuthenticationPrincipal UsuarioSistema usuarioSistema) {
-		validarVenda(venda, result);
+	public ModelAndView enviarEmail(Orcamento orcamento, BindingResult result, RedirectAttributes attributes, @AuthenticationPrincipal UsuarioSistema usuarioSistema) {
+		validarOrcamento(orcamento, result);
 		if (result.hasErrors()) {
-			return nova(venda);
+			return nova(orcamento);
 		}
 		
-		venda.setUsuario(usuarioSistema.getUsuario());
+		orcamento.setUsuario(usuarioSistema.getUsuario());
 		
-		venda = cadastroVendaService.salvar(venda);
-		mailer.enviar(venda);
+		orcamento = cadastroOrcamentoService.salvar(orcamento);
+		mailer.enviar(orcamento);
 		
-		attributes.addFlashAttribute("mensagem", String.format("Venda nº %d salva com sucesso e e-mail enviado", venda.getCodigo()));
-		return new ModelAndView("redirect:/vendas/nova");
+		attributes.addFlashAttribute("mensagem", String.format("Orçamento nº %d salvo com sucesso e e-mail enviado", orcamento.getCodigo()));
+		return new ModelAndView("redirect:/orcamentos/nova");
 	}
 	
 	@PostMapping("/item")
 	public ModelAndView adicionarItem(Long codigoCerveja, String uuid) {
 		Cerveja cerveja = cervejas.getOne(codigoCerveja);
 		tabelaItens.adicionarItem(uuid, cerveja, 1);
-		return mvTabelaItensVenda(uuid);
+		return mvTabelaItensOrcamento(uuid);
 	}
 	
 	@PutMapping("/item/{codigoCerveja}")
 	public ModelAndView alterarQuantidadeItem(@PathVariable("codigoCerveja") Cerveja cerveja
 			, Integer quantidade, String uuid) {
 		tabelaItens.alterarQuantidadeItens(uuid, cerveja, quantidade);
-		return mvTabelaItensVenda(uuid);
+		return mvTabelaItensOrcamento(uuid);
 	}
 	
 	@DeleteMapping("/item/{uuid}/{codigoCerveja}")
 	public ModelAndView excluirItem(@PathVariable("codigoCerveja") Cerveja cerveja
 			, @PathVariable String uuid) {
 		tabelaItens.excluirItem(uuid, cerveja);
-		return mvTabelaItensVenda(uuid);
+		return mvTabelaItensOrcamento(uuid);
 	}
 	
 	@GetMapping
-	public ModelAndView pesquisar(VendaFilter vendaFilter,
+	public ModelAndView pesquisar(OrcamentoFilter orcamentoFilter,
 			@PageableDefault(size = 10) Pageable pageable, HttpServletRequest httpServletRequest) {
-		ModelAndView mv = new ModelAndView("venda/PesquisaVendas");
-		mv.addObject("todosStatus", StatusVenda.values());
+		ModelAndView mv = new ModelAndView("orcamento/PesquisaOrcamentos");
+		mv.addObject("todosStatus", StatusOrcamento.values());
 		mv.addObject("tiposPessoa", TipoPessoa.values());
 		
-		PageWrapper<Venda> paginaWrapper = new PageWrapper<>(vendas.filtrar(vendaFilter, pageable)
+		PageWrapper<Orcamento> paginaWrapper = new PageWrapper<>(orcamentos.filtrar(orcamentoFilter, pageable)
 				, httpServletRequest);
 		mv.addObject("pagina", paginaWrapper);
 		return mv;
@@ -156,60 +156,60 @@ public class OrcamentosController {
 	
 	@GetMapping("/{codigo}")
 	public ModelAndView editar(@PathVariable Long codigo) {
-		Venda venda = vendas.buscarComItens(codigo);
+		Orcamento orcamento = orcamentos.buscarComItens(codigo);
 		
-		setUuid(venda);
-		for (ItemVenda item : venda.getItens()) {
-			tabelaItens.adicionarItem(venda.getUuid(), item.getCerveja(), item.getQuantidade());
+		setUuid(orcamento);
+		for (ItemOrcamento item : orcamento.getItens()) {
+			tabelaItens.adicionarItem(orcamento.getUuid(), item.getCerveja(), item.getQuantidade());
 		}
 		
-		ModelAndView mv = nova(venda);
-		mv.addObject(venda);
+		ModelAndView mv = nova(orcamento);
+		mv.addObject(orcamento);
 		return mv;
 	}
 	
 	@PostMapping(value = "/nova", params = "cancelar")
-	public ModelAndView cancelar(Venda venda, BindingResult result
+	public ModelAndView cancelar(Orcamento orcamento, BindingResult result
 				, RedirectAttributes attributes, @AuthenticationPrincipal UsuarioSistema usuarioSistema) {
 		try {
-			cadastroVendaService.cancelar(venda);
+			cadastroOrcamentoService.cancelar(orcamento);
 		} catch (AccessDeniedException e) {
 			ModelAndView mv = new ModelAndView("error");
 			mv.addObject("status", 403);
 			return mv;
 		}
 		
-		attributes.addFlashAttribute("mensagem", "Venda cancelada com sucesso");
-		return new ModelAndView("redirect:/vendas/" + venda.getCodigo());
+		attributes.addFlashAttribute("mensagem", "Orçamento cancelado com sucesso");
+		return new ModelAndView("redirect:/Orcamentos/" + orcamento.getCodigo());
 	}
 	
 	@GetMapping("/totalPorMes")
-	public @ResponseBody List<VendaMes> listarTotalVendaPorMes() {
-		return vendas.totalPorMes();
+	public @ResponseBody List<OrcamentoMes> listarTotalOrcamentoPorMes() {
+		return orcamentos.totalPorMes();
 	}
 	
 	@GetMapping("/porOrigem")
-	public @ResponseBody List<VendaOrigem> vendasPorNacionalidade() {
-		return this.vendas.totalPorOrigem();
+	public @ResponseBody List<OrcamentoOrigem> orcamentosPorNacionalidade() {
+		return this.orcamentos.totalPorOrigem();
 	}
 	
-	private ModelAndView mvTabelaItensVenda(String uuid) {
-		ModelAndView mv = new ModelAndView("venda/TabelaItensVenda");
+	private ModelAndView mvTabelaItensOrcamento(String uuid) {
+		ModelAndView mv = new ModelAndView("orcamento/TabelaItensOrcamento");
 		mv.addObject("itens", tabelaItens.getItens(uuid));
 		mv.addObject("valorTotal", tabelaItens.getValorTotal(uuid));
 		return mv;
 	}
 	
-	private void validarVenda(Venda venda, BindingResult result) {
-		venda.adicionarItens(tabelaItens.getItens(venda.getUuid()));
-		venda.calcularValorTotal();
+	private void validarOrcamento(Orcamento orcamento, BindingResult result) {
+		orcamento.adicionarItens(tabelaItens.getItens(orcamento.getUuid()));
+		orcamento.calcularValorTotal();
 		
-		vendaValidator.validate(venda, result);
+		orcamentoValidator.validate(orcamento, result);
 	}
 	
-	private void setUuid(Venda venda) {
-		if (StringUtils.isEmpty(venda.getUuid())) {
-			venda.setUuid(UUID.randomUUID().toString());
+	private void setUuid(Orcamento orcamento) {
+		if (StringUtils.isEmpty(orcamento.getUuid())) {
+			orcamento.setUuid(UUID.randomUUID().toString());
 		}
 	}
 
