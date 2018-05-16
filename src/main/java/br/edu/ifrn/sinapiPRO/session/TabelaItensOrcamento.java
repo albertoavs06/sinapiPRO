@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
-import br.edu.ifrn.sinapiPRO.model.Cerveja;
+import br.edu.ifrn.sinapiPRO.model.Composicao;
 import br.edu.ifrn.sinapiPRO.model.ItemOrcamento;
 
 class TabelaItensOrcamento {
@@ -25,8 +25,8 @@ class TabelaItensOrcamento {
 				.orElse(BigDecimal.ZERO);
 	}
 	
-	public void adicionarItem(Cerveja cerveja, Integer quantidade) {
-		Optional<ItemOrcamento> itemOrcamentoOptional = buscarItemPorCerveja(cerveja);
+	public void adicionarItem(Composicao composicao, Integer quantidade) {
+		Optional<ItemOrcamento> itemOrcamentoOptional = buscarItemPorComposicao(composicao);
 		
 		ItemOrcamento itemOrcamento = null;
 		if (itemOrcamentoOptional.isPresent()) {
@@ -34,21 +34,21 @@ class TabelaItensOrcamento {
 			itemOrcamento.setQuantidade(itemOrcamento.getQuantidade() + quantidade);
 		} else {
 			itemOrcamento = new ItemOrcamento();
-			itemOrcamento.setCerveja(cerveja);
+			itemOrcamento.setComposicao(composicao);
 			itemOrcamento.setQuantidade(quantidade);
-			itemOrcamento.setValorUnitario(cerveja.getValor());
+			itemOrcamento.setValorUnitario(composicao.getValor());
 			itens.add(0, itemOrcamento);
 		}
 	}
 	
-	public void alterarQuantidadeItens(Cerveja cerveja, Integer quantidade) {
-		ItemOrcamento itemOrcamento = buscarItemPorCerveja(cerveja).get();
+	public void alterarQuantidadeItens(Composicao composicao, Integer quantidade) {
+		ItemOrcamento itemOrcamento = buscarItemPorComposicao(composicao).get();
 		itemOrcamento.setQuantidade(quantidade);
 	}
 	
-	public void excluirItem(Cerveja cerveja) {
+	public void excluirItem(Composicao composicao) {
 		int indice = IntStream.range(0, itens.size())
-				.filter(i -> itens.get(i).getCerveja().equals(cerveja))
+				.filter(i -> itens.get(i).getComposicao().equals(composicao))
 				.findAny().getAsInt();
 		itens.remove(indice);
 	}
@@ -61,9 +61,9 @@ class TabelaItensOrcamento {
 		return itens;
 	}
 	
-	private Optional<ItemOrcamento> buscarItemPorCerveja(Cerveja cerveja) {
+	private Optional<ItemOrcamento> buscarItemPorComposicao(Composicao composicao) {
 		return itens.stream()
-				.filter(i -> i.getCerveja().equals(cerveja))
+				.filter(i -> i.getComposicao().equals(composicao))
 				.findAny();
 	}
 

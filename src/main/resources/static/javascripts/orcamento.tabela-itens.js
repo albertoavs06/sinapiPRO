@@ -2,7 +2,7 @@ Brewer.TabelaItens = (function() {
 	
 	function TabelaItens(autocomplete) {
 		this.autocomplete = autocomplete;
-		this.tabelaCervejasContainer = $('.js-tabela-cervejas-container');
+		this.tabelaComposicoesContainer = $('.js-tabela-composicoes-container');
 		this.uuid = $('#uuid').val();
 		this.emitter = $({});
 		this.on = this.emitter.on.bind(this.emitter);
@@ -16,7 +16,7 @@ Brewer.TabelaItens = (function() {
 	}
 	
 	TabelaItens.prototype.valorTotal = function() {
-		return this.tabelaCervejasContainer.data('valor');
+		return this.tabelaComposicoesContainer.data('valor');
 	}
 	
 	function onItemSelecionado(evento, item) {
@@ -24,7 +24,7 @@ Brewer.TabelaItens = (function() {
 			url: 'item',
 			method: 'POST',
 			data: {
-				codigoCerveja: item.codigo,
+				codigoComposicao: item.codigo,
 				uuid: this.uuid
 			}
 		});
@@ -33,7 +33,7 @@ Brewer.TabelaItens = (function() {
 	}
 	
 	function onItemAtualizadoNoServidor(html) {
-		this.tabelaCervejasContainer.html(html);
+		this.tabelaComposicoesContainer.html(html);
 		
 		bindQuantidade.call(this);
 		
@@ -50,10 +50,10 @@ Brewer.TabelaItens = (function() {
 			quantidade = 1;
 		}
 		
-		var codigoCerveja = input.data('codigo-cerveja');
+		var codigoComposicao = input.data('codigo-composicao');
 		
 		var resposta = $.ajax({
-			url: 'item/' + codigoCerveja,
+			url: 'item/' + codigoComposicao,
 			method: 'PUT',
 			data: {
 				quantidade: quantidade,
@@ -69,9 +69,9 @@ Brewer.TabelaItens = (function() {
 	}
 	
 	function onExclusaoItemClick(evento) {
-		var codigoCerveja = $(evento.target).data('codigo-cerveja');
+		var codigoComposicao = $(evento.target).data('codigo-composicao');
 		var resposta = $.ajax({
-			url: 'item/' + this.uuid + '/' + codigoCerveja,
+			url: 'item/' + this.uuid + '/' + codigoComposicao,
 			method: 'DELETE'
 		});
 		
@@ -79,7 +79,7 @@ Brewer.TabelaItens = (function() {
 	}
 	
 	function bindQuantidade() {
-		var quantidadeItemInput = $('.js-tabela-cerveja-quantidade-item');
+		var quantidadeItemInput = $('.js-tabela-composicao-quantidade-item');
 		quantidadeItemInput.on('change', onQuantidadeItemAlterado.bind(this));
 		quantidadeItemInput.maskNumber({ integer: true, thousands: '' });
 	}

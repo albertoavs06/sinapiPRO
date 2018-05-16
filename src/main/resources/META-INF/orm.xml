@@ -21,19 +21,19 @@
 			select date_format(v.data_criacao, '%Y/%m') mes
 				 , group_concat(distinct (select coalesce(sum(i.quantidade), 0) 
 				     from item_orcamento i
-				        , cerveja c
+				        , composicao c
 				        , orcamento v1
 				     where i.codigo_orcamento = v1.codigo 
-				       and i.codigo_cerveja = c.codigo
+				       and i.codigo_composicao = c.codigo
 				       and c.origem = 'NACIONAL'
 				       and date_format(v1.data_criacao, '%Y/%m') = date_format(v.data_criacao, '%Y/%m')
 				   )) total_nacional
 				 , group_concat(distinct (select coalesce(sum(i.quantidade), 0)
 				     from item_orcamento i
-				        , cerveja c
+				        , composicao c
 				        , orcamento v1
 				     where i.codigo_orcamento = v1.codigo 
-				       and i.codigo_cerveja = c.codigo
+				       and i.codigo_composicao = c.codigo
 				       and c.origem = 'INTERNACIONAL'
 				       and date_format(v1.data_criacao, '%Y/%m') = date_format(v.data_criacao, '%Y/%m')
 				   )) total_internacional

@@ -10,7 +10,7 @@ public class OrcamentoEvent {
 		this.orcamento = orcamento;
 	}
 
-	public Orcamento getVenda() {
+	public Orcamento getOrcamento() {
 		return orcamento;
 	}
 

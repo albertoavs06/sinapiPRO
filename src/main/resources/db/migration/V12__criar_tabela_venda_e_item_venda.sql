@@ -17,8 +17,8 @@ CREATE TABLE item_orcamento (
     codigo BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
     quantidade INTEGER NOT NULL,
     valor_unitario DECIMAL(10,2) NOT NULL,
-    codigo_cerveja BIGINT(20) NOT NULL,
+    codigo_composicao BIGINT(20) NOT NULL,
     codigo_orcamento BIGINT(20) NOT NULL,
-    FOREIGN KEY (codigo_cerveja) REFERENCES cerveja(codigo),
+    FOREIGN KEY (codigo_composicao) REFERENCES composicao(codigo),
     FOREIGN KEY (codigo_orcamento) REFERENCES orcamento(codigo)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

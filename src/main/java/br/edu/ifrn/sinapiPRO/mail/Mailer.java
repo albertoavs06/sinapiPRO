@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
-import br.edu.ifrn.sinapiPRO.model.Cerveja;
+import br.edu.ifrn.sinapiPRO.model.Composicao;
 import br.edu.ifrn.sinapiPRO.model.ItemOrcamento;
 import br.edu.ifrn.sinapiPRO.model.Orcamento;
  
@@ -44,21 +44,21 @@ public class Mailer {
 		context.setVariable("logo", "logo");
 		
 		Map<String, String> fotos = new HashMap<>();
-		boolean adicionarMockCerveja = false;
+		boolean adicionarMockComposicao = false;
 		
 		/*
 		for (ItemOrcamento item : orcamento.getItens()) {
 			
-		Linha cerveja = item.getCerveja();
+		Linha composicao = item.getComposicao();
 			
-			if (cerveja.temFoto()) {
-				String cid = "foto-" + cerveja.getCodigo();
+			if (composicao.temFoto()) {
+				String cid = "foto-" + composicao.getCodigo();
 				context.setVariable(cid, cid);
 				
-				fotos.put(cid, cerveja.getFoto() + "|" + cerveja.getContentType());
+				fotos.put(cid, composicao.getFoto() + "|" + composicao.getContentType());
 			} else {
-				adicionarMockCerveja = true;
-				context.setVariable("mockCerveja", "mockCerveja");
+				adicionarMockComposicao = true;
+				context.setVariable("mockComposicao", "mockComposicao");
 			}
 			
 		}

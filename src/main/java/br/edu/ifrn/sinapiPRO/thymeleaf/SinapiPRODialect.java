@@ -15,9 +15,9 @@ import br.edu.ifrn.sinapiPRO.thymeleaf.processor.OrderElementTagProcessor;
 import br.edu.ifrn.sinapiPRO.thymeleaf.processor.PaginationElementTagProcessor;
 
 @Component
-public class BrewerDialect extends AbstractProcessorDialect {
+public class SinapiPRODialect extends AbstractProcessorDialect {
 
-	public BrewerDialect() {
+	public SinapiPRODialect() {
 		super("Sinapi PRO", "sinapiPRO", StandardDialect.PROCESSOR_PRECEDENCE);
 	}
 	

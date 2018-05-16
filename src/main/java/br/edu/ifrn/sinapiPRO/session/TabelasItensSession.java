@@ -7,7 +7,7 @@ import java.util.Set;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
-import br.edu.ifrn.sinapiPRO.model.Cerveja;
+import br.edu.ifrn.sinapiPRO.model.Composicao;
 import br.edu.ifrn.sinapiPRO.model.ItemOrcamento;
 
 @SessionScope
@@ -16,20 +16,20 @@ public class TabelasItensSession {
 
 	private Set<TabelaItensOrcamento> tabelas = new HashSet<>();
 
-	public void adicionarItem(String uuid, Cerveja cerveja, int quantidade) {
+	public void adicionarItem(String uuid, Composicao composicao, int quantidade) {
 		TabelaItensOrcamento tabela = buscarTabelaPorUuid(uuid);
-		tabela.adicionarItem(cerveja, quantidade);
+		tabela.adicionarItem(composicao, quantidade);
 		tabelas.add(tabela);
 	}
 
-	public void alterarQuantidadeItens(String uuid, Cerveja cerveja, Integer quantidade) {
+	public void alterarQuantidadeItens(String uuid, Composicao composicao, Integer quantidade) {
 		TabelaItensOrcamento tabela = buscarTabelaPorUuid(uuid);
-		tabela.alterarQuantidadeItens(cerveja, quantidade);
+		tabela.alterarQuantidadeItens(composicao, quantidade);
 	}
 
-	public void excluirItem(String uuid, Cerveja cerveja) {
+	public void excluirItem(String uuid, Composicao composicao) {
 		TabelaItensOrcamento tabela = buscarTabelaPorUuid(uuid);
-		tabela.excluirItem(cerveja);
+		tabela.excluirItem(composicao);
 	}
 
 	public List<ItemOrcamento> getItens(String uuid) {

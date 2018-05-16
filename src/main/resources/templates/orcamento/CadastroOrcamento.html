@@ -108,24 +108,24 @@
 			<div class="row">
 				<div class="form-group  col-lg-12">
 					<ul class="nav nav-tabs  js-abas-venda">
-					  <li role="presentation" class="active"><a href="#cervejas">Cervejas</a></li>
+					  <li role="presentation" class="active"><a href="#composicoes">Composicoes</a></li>
 					  <li role="presentation"><a href="#entrega">Entrega</a></li>
 					</ul>
 				</div>
 			</div>
 			
 			<div class="tab-content">
-				<div class="tab-pane active" id="cervejas">
+				<div class="tab-pane active" id="composicoes">
 
 					<div class="row">
 						<div class="form-group  col-lg-12">
-							<input type="text" class="form-control  js-sku-nome-cerveja-input" id="cerveja" 
-								placeholder="Pesquise e adicione a cerveja pelo SKU ou nome" autofocus="autofocus" 
-								data:url="@{/cervejas}" th:disabled="${venda.salvarProibido}"/>
+							<input type="text" class="form-control  js-sku-nome-composicao-input" id="composicao" 
+								placeholder="Pesquise e adicione a composicao pelo SKU ou nome" autofocus="autofocus" 
+								data:url="@{/composicoes}" th:disabled="${venda.salvarProibido}"/>
 						</div>
 					</div>
 					
-					<div class="bw-tabela-cervejas  js-tabela-cervejas-container" data:valor="${valorTotalItens}">
+					<div class="bw-tabela-composicoes  js-tabela-composicoes-container" data:valor="${valorTotalItens}">
 						<th:block th:replace="venda/TabelaItensVenda"/>
 					</div>
 				</div>
@@ -173,7 +173,7 @@
 	</div>
 	
 	<th:block th:replace="cliente/PesquisaRapidaClientes :: pesquisaRapidaClientes"></th:block>
-	<th:block th:replace="hbs/TemplateAutocompleteCerveja"></th:block>
+	<th:block th:replace="hbs/TemplateAutocompleteComposicao"></th:block>
 </section>
 
 <th:block layout:fragment="javascript-extra">

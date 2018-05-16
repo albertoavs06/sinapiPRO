@@ -4,22 +4,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
-import br.edu.ifrn.sinapiPRO.model.Cerveja;
-import br.edu.ifrn.sinapiPRO.model.ItemVenda;
-import br.edu.ifrn.sinapiPRO.repository.Cervejas;
+import br.edu.ifrn.sinapiPRO.model.Composicao;
+import br.edu.ifrn.sinapiPRO.model.ItemOrcamento;
+import br.edu.ifrn.sinapiPRO.repository.Composicoes;
 
 @Component
-public class VendaListener {
+public class OrcamentoListener {
 
 	@Autowired
-	private Cervejas cervejas;
+	private Composicoes composicoes;
 	
 	@EventListener
-	public void vendaEmitida(VendaEvent vendaEvent) {
-		for (ItemVenda item : vendaEvent.getVenda().getItens()) {
-			Cerveja cerveja = cervejas.getOne(item.getCerveja().getCodigo());
-			cerveja.setQuantidadeEstoque(cerveja.getQuantidadeEstoque() - item.getQuantidade());
-			cervejas.save(cerveja);
+	public void orcamentoEmitida(OrcamentoEvent orcamentoEvent) {
+		for (ItemOrcamento item : orcamentoEvent.getOrcamento().getItens()) {
+			Composicao composicao = composicoes.getOne(item.getComposicao().getCodigo());
+			composicao.setQuantidadeEstoque(composicao.getQuantidadeEstoque() - item.getQuantidade());
+			composicoes.save(composicao);
 		}
 	}
 	

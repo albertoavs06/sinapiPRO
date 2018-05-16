@@ -28,12 +28,12 @@ import br.edu.ifrn.sinapiPRO.controller.validator.OrcamentoValidator;
 import br.edu.ifrn.sinapiPRO.dto.OrcamentoMes;
 import br.edu.ifrn.sinapiPRO.dto.OrcamentoOrigem;
 import br.edu.ifrn.sinapiPRO.mail.Mailer;
-import br.edu.ifrn.sinapiPRO.model.Cerveja;
+import br.edu.ifrn.sinapiPRO.model.Composicao;
 import br.edu.ifrn.sinapiPRO.model.ItemOrcamento;
 import br.edu.ifrn.sinapiPRO.model.StatusOrcamento;
 import br.edu.ifrn.sinapiPRO.model.TipoPessoa;
 import br.edu.ifrn.sinapiPRO.model.Orcamento;
-import br.edu.ifrn.sinapiPRO.repository.Cervejas;
+import br.edu.ifrn.sinapiPRO.repository.Composicoes;
 import br.edu.ifrn.sinapiPRO.repository.Orcamentos;
 import br.edu.ifrn.sinapiPRO.repository.filter.OrcamentoFilter;
 import br.edu.ifrn.sinapiPRO.security.UsuarioSistema;
@@ -45,7 +45,7 @@ import br.edu.ifrn.sinapiPRO.session.TabelasItensSession;
 public class OrcamentosController {
 	
 	@Autowired
-	private Cervejas cervejas;
+	private Composicoes composicoes;
 	
 	@Autowired
 	private TabelasItensSession tabelaItens;
@@ -57,7 +57,7 @@ public class OrcamentosController {
 	private OrcamentoValidator orcamentoValidator;
 	
 	@Autowired
-	private Orcamento orcamentos;
+	private Orcamentos orcamentos;
 	
 	@Autowired
 	private Mailer mailer;
@@ -121,23 +121,23 @@ public class OrcamentosController {
 	}
 	
 	@PostMapping("/item")
-	public ModelAndView adicionarItem(Long codigoCerveja, String uuid) {
-		Cerveja cerveja = cervejas.getOne(codigoCerveja);
-		tabelaItens.adicionarItem(uuid, cerveja, 1);
+	public ModelAndView adicionarItem(Long codigoComposicao, String uuid) {
+		Composicao composicao = composicoes.getOne(codigoComposicao);
+		tabelaItens.adicionarItem(uuid, composicao, 1);
 		return mvTabelaItensOrcamento(uuid);
 	}
 	
-	@PutMapping("/item/{codigoCerveja}")
-	public ModelAndView alterarQuantidadeItem(@PathVariable("codigoCerveja") Cerveja cerveja
+	@PutMapping("/item/{codigoComposicao}")
+	public ModelAndView alterarQuantidadeItem(@PathVariable("codigoComposicao") Composicao composicao
 			, Integer quantidade, String uuid) {
-		tabelaItens.alterarQuantidadeItens(uuid, cerveja, quantidade);
+		tabelaItens.alterarQuantidadeItens(uuid, composicao, quantidade);
 		return mvTabelaItensOrcamento(uuid);
 	}
 	
-	@DeleteMapping("/item/{uuid}/{codigoCerveja}")
-	public ModelAndView excluirItem(@PathVariable("codigoCerveja") Cerveja cerveja
+	@DeleteMapping("/item/{uuid}/{codigoComposicao}")
+	public ModelAndView excluirItem(@PathVariable("codigoComposicao") Composicao composicao
 			, @PathVariable String uuid) {
-		tabelaItens.excluirItem(uuid, cerveja);
+		tabelaItens.excluirItem(uuid, composicao);
 		return mvTabelaItensOrcamento(uuid);
 	}
 	
@@ -160,7 +160,7 @@ public class OrcamentosController {
 		
 		setUuid(orcamento);
 		for (ItemOrcamento item : orcamento.getItens()) {
-			tabelaItens.adicionarItem(orcamento.getUuid(), item.getCerveja(), item.getQuantidade());
+			tabelaItens.adicionarItem(orcamento.getUuid(), item.getComposicao(), item.getQuantidade());
 		}
 		
 		ModelAndView mv = nova(orcamento);
@@ -212,5 +212,4 @@ public class OrcamentosController {
 			orcamento.setUuid(UUID.randomUUID().toString());
 		}
 	}
-
 }

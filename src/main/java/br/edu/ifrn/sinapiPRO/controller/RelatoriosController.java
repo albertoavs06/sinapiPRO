@@ -29,7 +29,7 @@ public class RelatoriosController {
 	
 	@PostMapping("/orcamentosEmitidas")
 	public ResponseEntity<byte[]> gerarRelatorioOrcamentoEmitidas(PeriodoRelatorio periodoRelatorio) throws Exception {
-		byte[] relatorio = relatorioService.gerarRelatorioOrcamentoEmitidos(periodoRelatorio); 
+		byte[] relatorio = relatorioService.gerarRelatorioOrcamentosEmitidos(periodoRelatorio); 
 		
 		return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_PDF_VALUE)

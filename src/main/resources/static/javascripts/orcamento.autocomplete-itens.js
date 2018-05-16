@@ -3,8 +3,8 @@ Brewer = Brewer || {};
 Brewer.Autocomplete = (function() {
 	
 	function Autocomplete() {
-		this.skuOuNomeInput = $('.js-sku-nome-cerveja-input');
-		var htmlTemplateAutocomplete = $('#template-autocomplete-cerveja').html();
+		this.skuOuNomeInput = $('.js-sku-nome-composicao-input');
+		var htmlTemplateAutocomplete = $('#template-autocomplete-composicao').html();
 		this.template = Handlebars.compile(htmlTemplateAutocomplete);
 		this.emitter = $({});
 		this.on = this.emitter.on.bind(this.emitter);
@@ -39,9 +39,9 @@ Brewer.Autocomplete = (function() {
 		this.skuOuNomeInput.focus();
 	}
 	
-	function template(nome, cerveja) {
-		cerveja.valorFormatado = Brewer.formatarMoeda(cerveja.valor);
-		return this.template(cerveja);
+	function template(nome, composicao) {
+		composicao.valorFormatado = Brewer.formatarMoeda(composicao.valor);
+		return this.template(composicao);
 	}
 	
 	return Autocomplete

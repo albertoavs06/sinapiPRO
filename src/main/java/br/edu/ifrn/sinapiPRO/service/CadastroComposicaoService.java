@@ -6,30 +6,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.edu.ifrn.sinapiPRO.model.Cerveja;
-import br.edu.ifrn.sinapiPRO.repository.Cervejas;
+import br.edu.ifrn.sinapiPRO.model.Composicao;
+import br.edu.ifrn.sinapiPRO.repository.Composicoes;
 import br.edu.ifrn.sinapiPRO.service.exception.ImpossivelExcluirEntidadeException;
-import br.edu.ifrn.sinapiPRO.storage.FotoStorage;
 
 @Service
-public class CadastroCervejaService {
+public class CadastroComposicaoService {
 
 	@Autowired
-	private Cervejas cervejas;
-	
-	@Autowired
-	private FotoStorage fotoStorage;
+	private Composicoes composicoes;
 	
 	@Transactional
-	public void salvar(Cerveja cerveja) {
-		cervejas.save(cerveja);
+	public void salvar(Composicao composicao) {
+		composicoes.save(composicao);
 	}
 	
 	@Transactional
-	public void excluir(Cerveja cerveja) {
+	public void excluir(Composicao composicao) {
 		try {
-			cervejas.delete(cerveja);
-			cervejas.flush();
+			composicoes.delete(composicao);
+			composicoes.flush();
 		} catch (PersistenceException e) {
 			throw new ImpossivelExcluirEntidadeException("Impossível apagar Composição. Já foi usada em algum orçamento.");
 		}

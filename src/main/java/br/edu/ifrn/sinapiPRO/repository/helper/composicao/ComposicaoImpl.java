@@ -1,4 +1,4 @@
-package br.edu.ifrn.sinapiPRO.repository.helper.cerveja;
+package br.edu.ifrn.sinapiPRO.repository.helper.composicao;
 
 import java.util.List;
 
@@ -17,14 +17,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import br.edu.ifrn.sinapiPRO.dto.CervejaDTO;
+import br.edu.ifrn.sinapiPRO.dto.ComposicaoDTO;
 import br.edu.ifrn.sinapiPRO.dto.ValorItensEstoque;
-import br.edu.ifrn.sinapiPRO.model.Cerveja;
-import br.edu.ifrn.sinapiPRO.repository.filter.CervejaFilter;
+import br.edu.ifrn.sinapiPRO.model.Composicao;
+import br.edu.ifrn.sinapiPRO.repository.filter.ComposicaoFilter;
 import br.edu.ifrn.sinapiPRO.repository.paginacao.PaginacaoUtil;
-import br.edu.ifrn.sinapiPRO.storage.FotoStorage;
 
-public class CervejasImpl implements CervejasQueries {
+public class ComposicaoImpl implements ComposicaoQueries {
 
 	@PersistenceContext
 	private EntityManager manager;
@@ -32,16 +31,13 @@ public class CervejasImpl implements CervejasQueries {
 	@Autowired
 	private PaginacaoUtil paginacaoUtil;
 	
-	@Autowired
-	private FotoStorage fotoStorage;
-	
 	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional(readOnly = true)
-	public Page<Cerveja> filtrar(CervejaFilter filtro, Pageable pageable) {
+	public Page<Composicao> filtrar(ComposicaoFilter filtro, Pageable pageable) {
 		
-		Criteria criteria = manager.unwrap(Session.class).createCriteria(Cerveja.class);
-		// Criteria criteria = manager.unwrap(Session.class).createQuery(Cerveja.class);
+		Criteria criteria = manager.unwrap(Session.class).createCriteria(Composicao.class);
+		// Criteria criteria = manager.unwrap(Session.class).createQuery(Composicao.class);
 		
 		paginacaoUtil.preparar(criteria, pageable);
 		adicionarFiltro(filtro, criteria);
@@ -50,30 +46,29 @@ public class CervejasImpl implements CervejasQueries {
 	}
 	
 	@Override
-	public List<CervejaDTO> porSkuOuNome(String skuOuNome) {
-		String jpql = "select new br.edu.ifrn.sinapiPRO.dto.CervejaDTO(codigo, sku, nome, origem, valor, foto) "
-				+ "from Cerveja where lower(sku) like lower(:skuOuNome) or lower(nome) like lower(:skuOuNome)";
-		List<CervejaDTO> cervejasFiltradas = manager.createQuery(jpql, CervejaDTO.class)
+	public List<ComposicaoDTO> porSkuOuNome(String skuOuNome) {
+		String jpql = "select new br.edu.ifrn.sinapiPRO.dto.ComposicaoDTO(codigo, sku, nome, origem, valor) "
+				+ "from Composicao where lower(sku) like lower(:skuOuNome) or lower(nome) like lower(:skuOuNome)";
+		List<ComposicaoDTO> composicoesFiltradas = manager.createQuery(jpql, ComposicaoDTO.class)
 					.setParameter("skuOuNome", skuOuNome + "%")
 					.getResultList();
-		cervejasFiltradas.forEach(c -> c.setUrlThumbnailFoto(fotoStorage.getUrl(FotoStorage.THUMBNAIL_PREFIX + c.getFoto())));
-		return cervejasFiltradas;
+		return composicoesFiltradas;
 	}
 	
 	@Override
 	public ValorItensEstoque valorItensEstoque() {
-		String query = "select new br.edu.ifrn.sinapiPRO.dto.ValorItensEstoque(sum(valor * quantidadeEstoque), sum(quantidadeEstoque)) from Cerveja";
+		String query = "select new br.edu.ifrn.sinapiPRO.dto.ValorItensEstoque(sum(valor * quantidadeEstoque), sum(quantidadeEstoque)) from Composicao";
 		return manager.createQuery(query, ValorItensEstoque.class).getSingleResult();
 	}
 	
-	private Long total(CervejaFilter filtro) {
-		Criteria criteria = manager.unwrap(Session.class).createCriteria(Cerveja.class);
+	private Long total(ComposicaoFilter filtro) {
+		Criteria criteria = manager.unwrap(Session.class).createCriteria(Composicao.class);
 		adicionarFiltro(filtro, criteria);
 		criteria.setProjection(Projections.rowCount());
 		return (Long) criteria.uniqueResult();
 	}
 
-	private void adicionarFiltro(CervejaFilter filtro, Criteria criteria) {
+	private void adicionarFiltro(ComposicaoFilter filtro, Criteria criteria) {
 		if (filtro != null) {
 			if (!StringUtils.isEmpty(filtro.getSku())) {
 				criteria.add(Restrictions.eq("sku", filtro.getSku()));
@@ -105,7 +100,7 @@ public class CervejasImpl implements CervejasQueries {
 		}
 	}
 	
-	private boolean isEstiloPresente(CervejaFilter filtro) {
+	private boolean isEstiloPresente(ComposicaoFilter filtro) {
 		return filtro.getEstilo() != null && filtro.getEstilo().getCodigo() != null;
 	}
 

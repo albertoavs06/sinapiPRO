@@ -6,7 +6,7 @@
 	xmlns:sinapiPRO="http://sinapiPRO.ifrn.edu.br">
 	
 <head>
-	<title>Cadastro de cerveja</title>
+	<title>Cadastro de composicao</title>
 	
 	<link rel="stylesheet" th:href="@{/stylesheets/vendors/upload.min.css}"/>
 </head>
@@ -18,13 +18,13 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-xs-10">
-					<h1 th:if="${cerveja.nova}">Cadastro de cerveja</h1>
-					<h1 th:unless="${cerveja.nova}" th:text="|Edição da ${cerveja.nome}|">Edição de cerveja</h1>
+					<h1 th:if="${composicao.nova}">Cadastro de composicao</h1>
+					<h1 th:unless="${composicao.nova}" th:text="|Edição da ${composicao.nome}|">Edição de composicao</h1>
 				</div>
 			
 				<div class="col-xs-2">
 					<div class="aw-page-header-controls">
-						<a class="btn  btn-default" th:href="@{/cervejas}">
+						<a class="btn  btn-default" th:href="@{/composicoes}">
 							<i class="glyphicon  glyphicon-plus-sign"></i> <span class="hidden-xs  hidden-sm">Pesquisa</span>
 						</a>
 					</div>
@@ -35,8 +35,8 @@
 
 	<div class="container-fluid">
 
-		<form method="POST" th:object="${cerveja}" class="form-vertical  js-form-loading" 
-				th:action="${cerveja.nova} ? @{/cervejas/nova} : @{/cervejas/{codigo}(codigo=${cerveja.codigo})}">
+		<form method="POST" th:object="${composicao}" class="form-vertical  js-form-loading" 
+				th:action="${composicao.nova} ? @{/composicoes/nova} : @{/composicoes/{codigo}(codigo=${composicao.codigo})}">
 			<sinapiPRO:message/>
 			
 			<input type="hidden" th:field="*{codigo}"/>
@@ -136,7 +136,7 @@
 				
 					<label class="control-label">Foto</label>
 					
-					<div class="js-container-foto-cerveja" th:attr="data-url-fotos=@{/fotos}">
+					<div class="js-container-foto-composicao" th:attr="data-url-fotos=@{/fotos}">
 						<div id="upload-drop" class="bw-upload">
 							<img th:src="@{/images/mini-loading.gif}" class="js-img-loading  hidden"/>
 							<i class="glyphicon  glyphicon-cloud-upload"></i>
@@ -155,7 +155,7 @@
 	</div>
 	
 	<div th:replace="estilo/CadastroRapidoEstilo :: modal"></div>
-	<th:block th:replace="hbs/FotoCerveja"></th:block>
+	<th:block th:replace="hbs/FotoComposicao"></th:block>
 </section>
 
 <th:block layout:fragment="javascript-extra">
@@ -163,7 +163,7 @@
 	<script th:src="@{/javascripts/vendors/uikit.min.js}"></script>
 	<script th:src="@{/javascripts/vendors/upload.min.js}"></script>
 	<script th:src="@{/javascripts/vendors/handlebars.min.js}"></script>
-	<script th:src="@{/javascripts/cerveja.upload-foto.js}"></script>
+	<script th:src="@{/javascripts/composicao.upload-foto.js}"></script>
 	
 </th:block>
 	

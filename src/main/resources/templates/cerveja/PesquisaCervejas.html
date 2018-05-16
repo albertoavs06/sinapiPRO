@@ -6,7 +6,7 @@
 	xmlns:sinapiPRO="http://sinapiPRO.ifrn.edu.br">
 	
 <head>
-	<title>Pesquisa de cervejas</title>
+	<title>Pesquisa de composicoes</title>
 </head>
 
 <body>
@@ -15,13 +15,13 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-xs-10">
-					<h1>Pesquisa de cervejas</h1>
+					<h1>Pesquisa de composicoes</h1>
 				</div>
 				
 				<div class="col-xs-2">
 					<div class="aw-page-header-controls">
-						<a class="btn  btn-default" th:href="@{/cervejas/nova}">
-							<i class="glyphicon  glyphicon-plus-sign"></i> <span class="hidden-xs  hidden-sm">Nova cerveja</span>
+						<a class="btn  btn-default" th:href="@{/composicoes/nova}">
+							<i class="glyphicon  glyphicon-plus-sign"></i> <span class="hidden-xs  hidden-sm">Nova composicao</span>
 						</a>
 					</div>
 				</div>
@@ -30,7 +30,7 @@
 	</div>
 	
 	<div class="container-fluid">
-		<form method="GET" th:object="${cervejaFilter}">
+		<form method="GET" th:object="${composicaoFilter}">
 			<div class="row">
 				<div class="form-group  col-sm-6">
 					<label class="control-label" for="sku">SKU</label>
@@ -95,45 +95,45 @@
 			<table class="table  table-hover">
 				<thead>
 					<tr>
-						<th class="table-cervejas-col-foto"></th>
-						<th class="table-cervejas-col-sku">
+						<th class="table-composicoes-col-foto"></th>
+						<th class="table-composicoes-col-sku">
 							<sinapiPRO:order page="${pagina}" field="sku" text="SKU"/>
 						</th>
-						<th class="table-cervejas-col-nome">
+						<th class="table-composicoes-col-nome">
 							<sinapiPRO:order page="${pagina}" field="nome" text="Nome"/>
 						</th>
-						<th class="table-cervejas-col-estilo">Estilo</th>
-						<th class="table-cervejas-col-origem">Origem</th>
-						<th class="table-cervejas-col-valor">Valor</th>
-						<th class="table-cervejas-col-acoes"></th>
+						<th class="table-composicoes-col-estilo">Estilo</th>
+						<th class="table-composicoes-col-origem">Origem</th>
+						<th class="table-composicoes-col-valor">Valor</th>
+						<th class="table-composicoes-col-acoes"></th>
 					</tr>
 				</thead>
 				
 				<tbody>
-					<tr th:each="cerveja : ${pagina.conteudo}">
+					<tr th:each="composicao : ${pagina.conteudo}">
 						<td class="text-center">
-							<!-- <img th:src="@{/fotos/thumbnail.{foto}(foto=${cerveja.fotoOuMock})}" class="img-responsive"/> -->
-							<img th:src="${cerveja.urlThumbnailFoto}" class="img-responsive"/>
+							<!-- <img th:src="@{/fotos/thumbnail.{foto}(foto=${composicao.fotoOuMock})}" class="img-responsive"/> -->
+							<img th:src="${composicao.urlThumbnailFoto}" class="img-responsive"/>
 						</td>
-						<td class="text-center" th:text="${cerveja.sku}">AA1234</td>
-						<td th:text="${cerveja.nome}">Cerveja Stella</td>
-						<td th:text="${cerveja.estilo.nome}">Lager</td>
-						<td th:text="${cerveja.origem.descricao}">Internacional</td>
-						<td class="text-right" th:text="|R$ ${{cerveja.valor}}|">R$ 8.00</td>
+						<td class="text-center" th:text="${composicao.sku}">AA1234</td>
+						<td th:text="${composicao.nome}">Composicao Stella</td>
+						<td th:text="${composicao.estilo.nome}">Lager</td>
+						<td th:text="${composicao.origem.descricao}">Internacional</td>
+						<td class="text-right" th:text="|R$ ${{composicao.valor}}|">R$ 8.00</td>
 						<td class="text-center">
 							<a class="btn  btn-link  btn-xs  js-tooltip" title="Editar" 
-									th:href="@{/cervejas/{codigo}(codigo=${cerveja.codigo})}"> 
+									th:href="@{/composicoes/{codigo}(codigo=${composicao.codigo})}"> 
 								<i class="glyphicon glyphicon-pencil"></i>
 							</a>
 							<a class="btn  btn-link  btn-xs  js-tooltip  js-exclusao-btn" title="Excluir" href="#" 
-									data:url="@{/cervejas/{codigo}(codigo=${cerveja.codigo})}"
-									data:objeto="${cerveja.nome}">
+									data:url="@{/composicoes/{codigo}(codigo=${composicao.codigo})}"
+									data:objeto="${composicao.nome}">
 								<i class="glyphicon glyphicon-remove"></i>
 							</a>
 						</td>
 					</tr>
 					<tr th:if="${pagina.vazia}">
-						<td colspan="7">Nenhuma cerveja encontrada</td>
+						<td colspan="7">Nenhuma composicao encontrada</td>
 					</tr>
 				</tbody>
 			</table>

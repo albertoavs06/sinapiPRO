@@ -11,19 +11,19 @@
 	<h1 style="font-size: 22px" th:text="|Olá ${orcamento.cliente.nome}|">Olá Maria!</h1>
 	
 	<p>
-		Estamos enviando para você a relação de itens da sua compra em nossa loja de cervejas.
+		Estamos enviando para você a relação de itens do seu orçamento.
 	</p>
 	
 	<table style="width: 100%; border-collapse: collapse;  margin: 20px 0">
 		<th:block th:each="item : ${orcamento.itens}">
 			<tr style="border-bottom: 1px solid #ccc; border-top: 1px solid #ccc">
 				<td style="width: 50px; padding-bottom: 10px; padding-top: 10px">
-					<img style="width: 40px" src="../../static/images/cerveja-mock.png" th:src="|cid:${mockCerveja}|" th:unless="${item.cerveja.temFoto()}"/>
-					<img style="width: 40px" src="../../static/images/cerveja-mock.png" th:src="|cid:foto-${item.cerveja.codigo}|" th:if="${item.cerveja.temFoto()}"/>
+					<img style="width: 40px" src="../../static/images/composicao-mock.png" th:src="|cid:${mockComposicao}|" th:unless="${item.composicao.temFoto()}"/>
+					<img style="width: 40px" src="../../static/images/composicao-mock.png" th:src="|cid:foto-${item.composicao.codigo}|" th:if="${item.composicao.temFoto()}"/>
 				</td>
 				<td style="vertical-align: top; padding-bottom: 10px; padding-top: 10px">
-					<div style="display: block; font-weight: bold; font-size: 16px" th:text="${item.cerveja.nome}">Bhrama Lata 350 ml</div>
-					<div style="color: #8e8e8e" th:text="${item.cerveja.origem.descricao}">Nacional</div>
+					<div style="display: block; font-weight: bold; font-size: 16px" th:text="${item.composicao.nome}">Bhrama Lata 350 ml</div>
+					<div style="color: #8e8e8e" th:text="${item.composicao.origem.descricao}">Nacional</div>
 					<div style="color: #8e8e8e" th:text="|${item.quantidade} x R$${#numbers.formatDecimal(item.valorUnitario, 1, 2)}|">1 x R$1,90</div>
 				</td>
 				<td style="vertical-align: top; text-align: right; padding-bottom: 10px; padding-top: 10px">
@@ -34,7 +34,7 @@
 			<th:block th:if="${false}">
 				<tr style="border-bottom: 1px solid #ccc; border-top: 1px solid #ccc">
 					<td style="width: 50px; padding-bottom: 10px; padding-top: 10px">
-						<img style="width: 40px" src="../../static/images/cerveja-mock.png" />
+						<img style="width: 40px" src="../../static/images/composicao-mock.png" />
 					</td>
 					<td style="vertical-align: top; padding-bottom: 10px; padding-top: 10px">
 						<div style="display: block; font-weight: bold; font-size: 16px">Heineken</div>

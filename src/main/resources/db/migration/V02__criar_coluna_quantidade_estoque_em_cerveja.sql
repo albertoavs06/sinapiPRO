@@ -1,2 +1,2 @@
-ALTER TABLE cerveja
+ALTER TABLE composicao
   ADD quantidade_estoque INTEGER;

@@ -57,13 +57,13 @@ SinapiPRO.GraficoOrcamentoPorOrigem = (function() {
 	
 	function onDadosRecebidos(vendaOrigem) {
 		var meses = [];
-		var cervejasNacionais = [];
-		var cervejasInternacionais = [];
+		var composicoesNacionais = [];
+		var composicoesInternacionais = [];
 		
 		vendaOrigem.forEach(function(obj) {
 			meses.unshift(obj.mes);
-			cervejasNacionais.unshift(obj.totalNacional);
-			cervejasInternacionais.unshift(obj.totalInternacional)
+			composicoesNacionais.unshift(obj.totalNacional);
+			composicoesInternacionais.unshift(obj.totalInternacional)
 		});
 		
 		var graficoOrcamentosPorOrigem = new Chart(this.ctx, {
@@ -73,12 +73,12 @@ SinapiPRO.GraficoOrcamentoPorOrigem = (function() {
 		    	datasets: [{
 		    		label: 'Nacional',
 		    		backgroundColor: "rgba(220,220,220,0.5)",
-	                data: cervejasNacionais
+	                data: composicoesNacionais
 		    	},
 		    	{
 		    		label: 'Internacional',
 		    		backgroundColor: "rgba(26,179,148,0.5)",
-	                data: cervejasInternacionais
+	                data: composicoesInternacionais
 		    	}]
 		    },
 		});

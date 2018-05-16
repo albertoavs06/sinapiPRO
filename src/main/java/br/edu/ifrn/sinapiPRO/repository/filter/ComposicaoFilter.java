@@ -6,7 +6,7 @@ import br.edu.ifrn.sinapiPRO.model.Estilo;
 import br.edu.ifrn.sinapiPRO.model.Origem;
 import br.edu.ifrn.sinapiPRO.model.Sabor;
 
-public class CervejaFilter {
+public class ComposicaoFilter {
 
 	private String sku;
 	private String nome;

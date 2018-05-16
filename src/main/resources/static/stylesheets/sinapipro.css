@@ -86,35 +86,35 @@
 	width: 80px;
 }
 
-/* Colunas - Pesquisa de Cervejas */
-.table-cervejas-col-foto {
+/* Colunas - Pesquisa de Composicoes */
+.table-composicoes-col-foto {
 	min-width: 50px;
 	width: 50px
 }
 
-.table-cervejas-col-sku {
+.table-composicoes-col-sku {
 	width: 90px;
 	text-align: center;
 }
 
-.table-cervejas-col-nome {
+.table-composicoes-col-nome {
 	
 }
 
-.table-cervejas-col-estilo {
+.table-composicoes-col-estilo {
 	width: 120px;
 }
 
-.table-cervejas-col-origem {
+.table-composicoes-col-origem {
 	width: 100px;
 }
 
-.table-cervejas-col-valor {
+.table-composicoes-col-valor {
 	width: 100px;
 	text-align: right;
 }
 
-.table-cervejas-col-acoes {
+.table-composicoes-col-acoes {
 	width: 80px;
 }
 
@@ -164,12 +164,12 @@
 	text-align: center;
 }
 
-/* Tabela Cervejas página de Orcamentos */
-.bw-tabela-cervejas {
+/* Tabela Composicoes página de Orcamentos */
+.bw-tabela-composicoes {
 	margin-bottom: 15px;
 }
 
-.bw-tabela-cervejas__vazio {
+.bw-tabela-composicoes__vazio {
 	padding: 15px 15px;
 	
 	border: 1px dashed #ddd;
@@ -248,34 +248,34 @@
 	margin-left: 60px;
 }
 
-.bw-tabela-cerveja-nome {
+.bw-tabela-composicao-nome {
 	font-weight: 500;
 	font-size: 1.1em;
 	display: block;
 }
 
-.bw-tabela-cerveja-origem {
+.bw-tabela-composicao-origem {
 	color: #aaa;
 	display: block;
 	font-weight: 200;
 }
 
-.bw-tabela-cerveja-campo-quantidade {
+.bw-tabela-composicao-campo-quantidade {
 	width: 30px;
 	text-align: right;
 }
 
-.bw-tabela-cerveja-valor-pequeno {
+.bw-tabela-composicao-valor-pequeno {
 	font-weight: 300;
 	font-size: 1em;
 }
 
-.bw-tabela-cerveja-valor-medio {
+.bw-tabela-composicao-valor-medio {
 	font-weight: 300;
 	font-size: 1.3em;
 }
 
-.bw-tabela-cerveja-valor-grande {
+.bw-tabela-composicao-valor-grande {
 	font-weight: 300;
 	font-size: 1.6em;
 }

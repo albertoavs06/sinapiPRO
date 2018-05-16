@@ -28,10 +28,8 @@ import javax.validation.constraints.Size;
 
 import org.springframework.util.StringUtils;
 
-import br.edu.ifrn.sinapiPRO.repository.listener.CervejaEntityListener;
 import br.edu.ifrn.sinapiPRO.validation.SKU;
-
-@EntityListeners(CervejaEntityListener.class)
+ 
 @Entity
 @Table(name = "obra")
 public class Obra implements Serializable {
