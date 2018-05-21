@@ -10,7 +10,7 @@ import br.edu.ifrn.sinapiPRO.dto.ValorItensEstoque;
 import br.edu.ifrn.sinapiPRO.model.Composicao;
 import br.edu.ifrn.sinapiPRO.repository.filter.ComposicaoFilter;
 
-public interface ComposicaoQueries {
+public interface ComposicoesQueries {
 
 	public Page<Composicao> filtrar(ComposicaoFilter filtro, Pageable pageable);
 	

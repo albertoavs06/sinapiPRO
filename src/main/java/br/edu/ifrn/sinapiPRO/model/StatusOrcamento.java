@@ -3,8 +3,8 @@ package br.edu.ifrn.sinapiPRO.model;
 public enum StatusOrcamento {
 
 	ORCAMENTO("Orçamento"), 
-	EMITIDA("Emitida"), 
-	CANCELADA("Cancelada");
+	EMITIDO("Emitido"), 
+	CANCELADO("Cancelado");
 
 	private String descricao;
 

@@ -1,5 +1,6 @@
 package br.edu.ifrn.sinapiPRO.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -28,7 +29,9 @@ import org.hibernate.annotations.DynamicUpdate;
 @Entity
 @Table(name = "orcamento")
 @DynamicUpdate
-public class Orcamento {
+public class Orcamento implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -212,7 +215,7 @@ public class Orcamento {
 	}
 	
 	public boolean isSalvarPermitido() {
-		return !status.equals(StatusOrcamento.CANCELADA);
+		return !status.equals(StatusOrcamento.CANCELADO);
 	}
 	
 	public boolean isSalvarProibido() {

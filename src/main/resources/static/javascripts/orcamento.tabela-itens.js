@@ -1,4 +1,4 @@
-Brewer.TabelaItens = (function() {
+SinapiPRO.TabelaItens = (function() {
 	
 	function TabelaItens(autocomplete) {
 		this.autocomplete = autocomplete;

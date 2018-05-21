@@ -1,6 +1,6 @@
-var Brewer = Brewer || {};
+var SinapiPRO = SinapiPRO || {};
 
-Brewer.EstiloCadastroRapido = (function() {
+SinapiPRO.EstiloCadastroRapido = (function() {
 	
 	function EstiloCadastroRapido() {
 		this.modal = $('#modalCadastroRapidoEstilo');
@@ -59,6 +59,6 @@ Brewer.EstiloCadastroRapido = (function() {
 }());
 
 $(function() {
-	var estiloCadastroRapido = new Brewer.EstiloCadastroRapido();
+	var estiloCadastroRapido = new SinapiPRO.EstiloCadastroRapido();
 	estiloCadastroRapido.iniciar();
 });

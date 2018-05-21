@@ -2,8 +2,6 @@ package br.edu.ifrn.sinapiPRO.dto;
 
 import java.math.BigDecimal;
 
-import org.springframework.util.StringUtils;
-
 import br.edu.ifrn.sinapiPRO.model.Origem;
 
 public class ComposicaoDTO {
@@ -13,9 +11,8 @@ public class ComposicaoDTO {
 	private String nome;
 	private String origem;
 	private BigDecimal valor;
-	private String urlThumbnailFoto;
 
-	public ComposicaoDTO(Long codigo, String sku, String nome, Origem origem, BigDecimal valor, String foto) {
+	public ComposicaoDTO(Long codigo, String sku, String nome, Origem origem, BigDecimal valor) {
 		this.codigo = codigo;
 		this.sku = sku;
 		this.nome = nome;

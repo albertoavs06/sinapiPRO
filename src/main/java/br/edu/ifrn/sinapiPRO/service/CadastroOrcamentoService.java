@@ -32,8 +32,8 @@ public class CadastroOrcamentoService {
 		if (orcamento.isNova()) {
 			orcamento.setDataCriacao(LocalDateTime.now());
 		} else {
-			Orcamento vendaExistente = orcamentos.getOne(orcamento.getCodigo());
-			orcamento.setDataCriacao(vendaExistente.getDataCriacao());
+			Orcamento orcamentoExistente = orcamentos.getOne(orcamento.getCodigo());
+			orcamento.setDataCriacao(orcamentoExistente.getDataCriacao());
 		}
 		
 		if (orcamento.getDataEntrega() != null) {
@@ -46,7 +46,7 @@ public class CadastroOrcamentoService {
 
 	@Transactional
 	public void emitir(Orcamento orcamento) {
-		orcamento.setStatus(StatusOrcamento.EMITIDA);
+		orcamento.setStatus(StatusOrcamento.EMITIDO);
 		salvar(orcamento);
 		
 		publisher.publishEvent(new OrcamentoEvent(orcamento));
@@ -57,7 +57,7 @@ public class CadastroOrcamentoService {
 	public void cancelar(Orcamento orcamento) {
 		Orcamento orcamentoExistente = orcamentos.getOne(orcamento.getCodigo());
 		
-		orcamentoExistente.setStatus(StatusOrcamento.CANCELADA);
+		orcamentoExistente.setStatus(StatusOrcamento.CANCELADO);
 		orcamentos.save(orcamentoExistente);
 	}
 

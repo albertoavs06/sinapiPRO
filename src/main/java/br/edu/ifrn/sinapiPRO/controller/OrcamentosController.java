@@ -27,7 +27,6 @@ import br.edu.ifrn.sinapiPRO.controller.page.PageWrapper;
 import br.edu.ifrn.sinapiPRO.controller.validator.OrcamentoValidator;
 import br.edu.ifrn.sinapiPRO.dto.OrcamentoMes;
 import br.edu.ifrn.sinapiPRO.dto.OrcamentoOrigem;
-import br.edu.ifrn.sinapiPRO.mail.Mailer;
 import br.edu.ifrn.sinapiPRO.model.Composicao;
 import br.edu.ifrn.sinapiPRO.model.ItemOrcamento;
 import br.edu.ifrn.sinapiPRO.model.StatusOrcamento;
@@ -58,9 +57,6 @@ public class OrcamentosController {
 	
 	@Autowired
 	private Orcamentos orcamentos;
-	
-	@Autowired
-	private Mailer mailer;
 	
 	@GetMapping("/nova")
 	public ModelAndView nova(Orcamento orcamento) {
@@ -101,22 +97,6 @@ public class OrcamentosController {
 		
 		cadastroOrcamentoService.emitir(orcamento);
 		attributes.addFlashAttribute("mensagem", "Orçamento emitido com sucesso");
-		return new ModelAndView("redirect:/orcamentos/nova");
-	}
-	
-	@PostMapping(value = "/nova", params = "enviarEmail")
-	public ModelAndView enviarEmail(Orcamento orcamento, BindingResult result, RedirectAttributes attributes, @AuthenticationPrincipal UsuarioSistema usuarioSistema) {
-		validarOrcamento(orcamento, result);
-		if (result.hasErrors()) {
-			return nova(orcamento);
-		}
-		
-		orcamento.setUsuario(usuarioSistema.getUsuario());
-		
-		orcamento = cadastroOrcamentoService.salvar(orcamento);
-		mailer.enviar(orcamento);
-		
-		attributes.addFlashAttribute("mensagem", String.format("Orçamento nº %d salvo com sucesso e e-mail enviado", orcamento.getCodigo()));
 		return new ModelAndView("redirect:/orcamentos/nova");
 	}
 	

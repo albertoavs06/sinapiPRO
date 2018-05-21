@@ -15,7 +15,7 @@ public class OrcamentoListener {
 	private Composicoes composicoes;
 	
 	@EventListener
-	public void orcamentoEmitida(OrcamentoEvent orcamentoEvent) {
+	public void orcamentoEmitido(OrcamentoEvent orcamentoEvent) {
 		for (ItemOrcamento item : orcamentoEvent.getOrcamento().getItens()) {
 			Composicao composicao = composicoes.getOne(item.getComposicao().getCodigo());
 			composicao.setQuantidadeEstoque(composicao.getQuantidadeEstoque() - item.getQuantidade());

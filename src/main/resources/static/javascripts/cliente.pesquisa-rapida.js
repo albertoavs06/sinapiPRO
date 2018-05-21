@@ -1,6 +1,6 @@
-Brewer = Brewer || {};
+SinapiPRO = SinapiPRO || {};
 
-Brewer.PesquisaRapidaCliente = (function() {
+SinapiPRO.PesquisaRapidaCliente = (function() {
 	
 	function PesquisaRapidaCliente() {
 		this.pesquisaRapidaClientesModal = $('#pesquisaRapidaClientes');
@@ -43,7 +43,7 @@ Brewer.PesquisaRapidaCliente = (function() {
 		var html = this.template(resultado);
 		this.containerTabelaPesquisa.html(html);
 		
-		var tabelaClientePesquisaRapida = new Brewer.TabelaClientePesquisaRapida(this.pesquisaRapidaClientesModal);
+		var tabelaClientePesquisaRapida = new SinapiPRO.TabelaClientePesquisaRapida(this.pesquisaRapidaClientesModal);
 		tabelaClientePesquisaRapida.iniciar();
 	} 
 	
@@ -55,7 +55,7 @@ Brewer.PesquisaRapidaCliente = (function() {
 	
 }());
 
-Brewer.TabelaClientePesquisaRapida = (function() {
+SinapiPRO.TabelaClientePesquisaRapida = (function() {
 	
 	function TabelaClientePesquisaRapida(modal) {
 		this.modalCliente = modal;
@@ -79,6 +79,6 @@ Brewer.TabelaClientePesquisaRapida = (function() {
 }());
 
 $(function() {
-	var pesquisaRapidaCliente = new Brewer.PesquisaRapidaCliente();
+	var pesquisaRapidaCliente = new SinapiPRO.PesquisaRapidaCliente();
 	pesquisaRapidaCliente.iniciar();
 });

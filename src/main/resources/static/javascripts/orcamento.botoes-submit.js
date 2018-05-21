@@ -1,6 +1,6 @@
-Brewer = Brewer || {};
+SinapiPRO = SinapiPRO || {};
 
-Brewer.BotaoSubmit = (function() {
+SinapiPRO.BotaoSubmit = (function() {
 	
 	function BotaoSubmit() {
 		this.submitBtn = $('.js-submit-btn');
@@ -30,7 +30,7 @@ Brewer.BotaoSubmit = (function() {
 
 $(function() {
 	
-	var botaoSubmit = new Brewer.BotaoSubmit();
+	var botaoSubmit = new SinapiPRO.BotaoSubmit();
 	botaoSubmit.iniciar();
 	
 });

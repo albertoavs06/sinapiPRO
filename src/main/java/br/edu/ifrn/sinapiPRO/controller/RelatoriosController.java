@@ -27,8 +27,8 @@ public class RelatoriosController {
 		return mv;
 	}
 	
-	@PostMapping("/orcamentosEmitidas")
-	public ResponseEntity<byte[]> gerarRelatorioOrcamentoEmitidas(PeriodoRelatorio periodoRelatorio) throws Exception {
+	@PostMapping("/orcamentosEmitidos")
+	public ResponseEntity<byte[]> gerarRelatorioOrcamentoEmitidos(PeriodoRelatorio periodoRelatorio) throws Exception {
 		byte[] relatorio = relatorioService.gerarRelatorioOrcamentosEmitidos(periodoRelatorio); 
 		
 		return ResponseEntity.ok()

@@ -1,6 +1,6 @@
-var Brewer = Brewer || {};
+var SinapiPRO = SinapiPRO || {};
 
-Brewer.UploadFoto = (function() {
+SinapiPRO.UploadFoto = (function() {
 	
 	function UploadFoto() {
 		this.inputNomeFoto = $('input[name=foto]');
@@ -81,6 +81,6 @@ Brewer.UploadFoto = (function() {
 })();
 
 $(function() {
-	var uploadFoto = new Brewer.UploadFoto();
+	var uploadFoto = new SinapiPRO.UploadFoto();
 	uploadFoto.iniciar();
 });

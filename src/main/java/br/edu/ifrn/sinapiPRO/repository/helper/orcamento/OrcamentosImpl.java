@@ -33,7 +33,7 @@ import br.edu.ifrn.sinapiPRO.model.Orcamento;
 import br.edu.ifrn.sinapiPRO.repository.filter.OrcamentoFilter;
 import br.edu.ifrn.sinapiPRO.repository.paginacao.PaginacaoUtil;
 
-public class Orcamentosmpl implements OrcamentosQueries {
+public class OrcamentosImpl implements OrcamentosQueries {
 
 	@PersistenceContext
 	private EntityManager manager;
@@ -67,7 +67,7 @@ public class Orcamentosmpl implements OrcamentosQueries {
 		Optional<BigDecimal> optional = Optional.ofNullable(
 				manager.createQuery("select sum(valorTotal) from Orcamento where year(dataCriacao) = :ano and status = :status", BigDecimal.class)
 					.setParameter("ano", Year.now().getValue())
-					.setParameter("status", StatusOrcamento.EMITIDA)
+					.setParameter("status", StatusOrcamento.EMITIDO)
 					.getSingleResult());
 		return optional.orElse(BigDecimal.ZERO);
 	}
@@ -77,7 +77,7 @@ public class Orcamentosmpl implements OrcamentosQueries {
 		Optional<BigDecimal> optional = Optional.ofNullable(
 				manager.createQuery("select sum(valorTotal) from Orcamento where month(dataCriacao) = :mes and status = :status", BigDecimal.class)
 					.setParameter("mes", MonthDay.now().getMonthValue())
-					.setParameter("status", StatusOrcamento.EMITIDA)
+					.setParameter("status", StatusOrcamento.EMITIDO)
 					.getSingleResult());
 		return optional.orElse(BigDecimal.ZERO);
 	}
@@ -87,7 +87,7 @@ public class Orcamentosmpl implements OrcamentosQueries {
 		Optional<BigDecimal> optional = Optional.ofNullable(
 				manager.createQuery("select sum(valorTotal)/count(*) from Orcamento where year(dataCriacao) = :ano and status = :status", BigDecimal.class)
 					.setParameter("ano", Year.now().getValue())
-					.setParameter("status", StatusOrcamento.EMITIDA)
+					.setParameter("status", StatusOrcamento.EMITIDO)
 					.getSingleResult());
 		return optional.orElse(BigDecimal.ZERO);
 	}

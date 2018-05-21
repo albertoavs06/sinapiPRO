@@ -1,6 +1,6 @@
-Brewer = Brewer || {};
+SinapiPRO = SinapiPRO || {};
 
-Brewer.DialogoExcluir = (function() {
+SinapiPRO.DialogoExcluir = (function() {
 	
 	function DialogoExcluir() {
 		this.exclusaoBtn = $('.js-exclusao-btn')
@@ -57,6 +57,6 @@ Brewer.DialogoExcluir = (function() {
 }());
 
 $(function() {
-	var dialogo = new Brewer.DialogoExcluir();
+	var dialogo = new SinapiPRO.DialogoExcluir();
 	dialogo.iniciar();
 });

@@ -1,6 +1,6 @@
 var SinapiPRO = SinapiPRO || {};
 
-Brewer.GraficoOrcamentoPorMes = (function() {
+SinapiPRO.GraficoOrcamentoPorMes = (function() {
 	
 	function GraficoOrcamentoPorMes() {
 		this.ctx = $('#graficoOrcamentosPorMes')[0].getContext('2d');
@@ -17,7 +17,7 @@ Brewer.GraficoOrcamentoPorMes = (function() {
 	function onDadosRecebidos(orcamentoMes) {
 		var meses = [];
 		var valores = [];
-		vendaMes.forEach(function(obj) {
+		orcamentoMes.forEach(function(obj) {
 			meses.unshift(obj.mes);
 			valores.unshift(obj.total);
 		});
@@ -27,7 +27,7 @@ Brewer.GraficoOrcamentoPorMes = (function() {
 		    data: {
 		    	labels: meses,
 		    	datasets: [{
-		    		label: 'Vendas por mês',
+		    		label: 'Orcamentos por mês',
 		    		backgroundColor: "rgba(26,179,148,0.5)",
 	                pointBorderColor: "rgba(26,179,148,1)",
 	                pointBackgroundColor: "#fff",
@@ -47,7 +47,7 @@ SinapiPRO.GraficoOrcamentoPorOrigem = (function() {
 		this.ctx = $('#graficoOrcamentosPorOrigem')[0].getContext('2d');
 	}
 	
-	GraficoVendaPorOrigem.prototype.iniciar = function() {
+	GraficoOrcamentoPorOrigem.prototype.iniciar = function() {
 		$.ajax({
 			url: 'orcamentos/porOrigem',
 			method: 'GET', 
@@ -55,12 +55,12 @@ SinapiPRO.GraficoOrcamentoPorOrigem = (function() {
 		});
 	}
 	
-	function onDadosRecebidos(vendaOrigem) {
+	function onDadosRecebidos(orcamentoOrigem) {
 		var meses = [];
 		var composicoesNacionais = [];
 		var composicoesInternacionais = [];
 		
-		vendaOrigem.forEach(function(obj) {
+		orcamentoOrigem.forEach(function(obj) {
 			meses.unshift(obj.mes);
 			composicoesNacionais.unshift(obj.totalNacional);
 			composicoesInternacionais.unshift(obj.totalInternacional)
@@ -84,15 +84,15 @@ SinapiPRO.GraficoOrcamentoPorOrigem = (function() {
 		});
 	}
 	
-	return GraficoVendaPorOrigem;
+	return GraficoOrcamentoPorOrigem;
 	
 }());
 
 
 $(function() {
-	var graficoOrcamentoPorMes = new SinapiPRO.GraficoVendaPorMes();
-	graficoVendaPorMes.iniciar();
+	var graficoOrcamentoPorMes = new SinapiPRO.GraficoOrcamentoPorMes();
+	graficoOrcamentoPorMes.iniciar();
 	
-	var graficoOrcamentoPorOrigem = new SinapiPRO.GraficoVendaPorOrigem();
-	graficoVendaPorOrigem.iniciar();
+	var graficoOrcamentoPorOrigem = new SinapiPRO.GraficoOrcamentoPorOrigem();
+	graficoOrcamentoPorOrigem.iniciar();
 });

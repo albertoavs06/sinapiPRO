@@ -19,14 +19,14 @@
 				<input type="text" maxlength="3" 
 					class="bw-tabela-composicao-campo-quantidade  js-tabela-composicao-quantidade-item" 
 					th:value="${item.quantidade}" data:codigo-composicao="${item.composicao.codigo}"
-					th:disabled="${venda != null ? venda.salvarProibido : false}"/>
+					th:disabled="${orcamento != null ? orcamento.salvarProibido : false}"/>
 				<span>x R$[[${{item.valorUnitario}}]]</span>
 			</div>
 			<div class="bw-tabela-composicao-valor-grande">R$[[${{item.valorTotal}}]]</div>
 		</div>
 		
-		<div class="bw-tabela-item__painel-exclusao" th:if="${venda != null ? venda.salvarPermitido : false}">
-			<span class="bw-tabela-item__titulo-exclusao">Excluir este item da venda?</span>
+		<div class="bw-tabela-item__painel-exclusao" th:if="${orcamento != null ? orcamento.salvarPermitido : false}">
+			<span class="bw-tabela-item__titulo-exclusao">Excluir este item do orcamento?</span>
 			<button type="button" class="btn  btn-danger  js-exclusao-item-btn"
 				data:codigo-composicao="${item.composicao.codigo}">Sim, excluir!</button>
 		</div>

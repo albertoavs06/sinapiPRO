@@ -1,6 +1,6 @@
-Brewer = Brewer || {};
+SinapiPRO = SinapiPRO || {};
 
-Brewer.MultiSelecao = (function() {
+SinapiPRO.MultiSelecao = (function() {
 	
 	function MultiSelecao() {
 		this.statusBtn = $('.js-status-btn');
@@ -61,6 +61,6 @@ Brewer.MultiSelecao = (function() {
 }());
 
 $(function() {
-	var multiSelecao = new Brewer.MultiSelecao();
+	var multiSelecao = new SinapiPRO.MultiSelecao();
 	multiSelecao.iniciar();
 });

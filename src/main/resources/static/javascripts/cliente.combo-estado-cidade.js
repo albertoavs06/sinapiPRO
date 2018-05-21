@@ -1,6 +1,6 @@
-var Brewer = Brewer || {};
+var SinapiPRO = SinapiPRO || {};
 
-Brewer.ComboEstado = (function() {
+SinapiPRO.ComboEstado = (function() {
 	
 	function ComboEstado() {
 		this.combo = $('#estado');
@@ -20,7 +20,7 @@ Brewer.ComboEstado = (function() {
 	
 }());
 
-Brewer.ComboCidade = (function() {
+SinapiPRO.ComboCidade = (function() {
 	
 	function ComboCidade(comboEstado) {
 		this.comboEstado = comboEstado;
@@ -93,10 +93,10 @@ Brewer.ComboCidade = (function() {
 
 $(function() {
 	
-	var comboEstado = new Brewer.ComboEstado();
+	var comboEstado = new SinapiPRO.ComboEstado();
 	comboEstado.iniciar();
 	
-	var comboCidade = new Brewer.ComboCidade(comboEstado);
+	var comboCidade = new SinapiPRO.ComboCidade(comboEstado);
 	comboCidade.iniciar();
 	
 });

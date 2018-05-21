@@ -1,6 +1,6 @@
-var Brewer = Brewer || {};
+var SinapiPRO = SinapiPRO || {};
 
-Brewer.MaskMoney = (function() {
+SinapiPRO.MaskMoney = (function() {
 	
 	function MaskMoney() {
 		this.decimal = $('.js-decimal');
@@ -18,7 +18,7 @@ Brewer.MaskMoney = (function() {
 	
 }());
 
-Brewer.MaskPhoneNumber = (function() {
+SinapiPRO.MaskPhoneNumber = (function() {
 	
 	function MaskPhoneNumber() {
 		this.inputPhoneNumber = $('.js-phone-number');
@@ -42,7 +42,7 @@ Brewer.MaskPhoneNumber = (function() {
 	
 }());
 
-Brewer.MaskCep = (function() {
+SinapiPRO.MaskCep = (function() {
 	
 	function MaskCep() {
 		this.inputCep = $('.js-cep');
@@ -56,7 +56,7 @@ Brewer.MaskCep = (function() {
 	
 }());
 
-Brewer.MaskDate = (function() {
+SinapiPRO.MaskDate = (function() {
 	
 	function MaskDate() {
 		this.inputDate = $('.js-date');
@@ -75,7 +75,7 @@ Brewer.MaskDate = (function() {
 	
 }());
 
-Brewer.Security = (function() {
+SinapiPRO.Security = (function() {
 	
 	function Security() {
 		this.token = $('input[name=_csrf]').val();
@@ -94,28 +94,28 @@ Brewer.Security = (function() {
 
 numeral.language('pt-br');
 
-Brewer.formatarMoeda = function(valor) {
+SinapiPRO.formatarMoeda = function(valor) {
 	return numeral(valor).format('0,0.00');
 }
 
-Brewer.recuperarValor = function(valorFormatado) {
+SinapiPRO.recuperarValor = function(valorFormatado) {
 	return numeral().unformat(valorFormatado);
 }
 
 $(function() {
-	var maskMoney = new Brewer.MaskMoney();
+	var maskMoney = new SinapiPRO.MaskMoney();
 	maskMoney.enable();
 	
-	var maskPhoneNumber = new Brewer.MaskPhoneNumber();
+	var maskPhoneNumber = new SinapiPRO.MaskPhoneNumber();
 	maskPhoneNumber.enable();
 	
-	var maskCep = new Brewer.MaskCep();
+	var maskCep = new SinapiPRO.MaskCep();
 	maskCep.enable();
 	
-	var maskDate = new Brewer.MaskDate();
+	var maskDate = new SinapiPRO.MaskDate();
 	maskDate.enable();
 	
-	var security = new Brewer.Security();
+	var security = new SinapiPRO.Security();
 	security.enable();
 	
 });

@@ -1,6 +1,6 @@
-var Brewer = Brewer || {};
+var SinapiPRO = SinapiPRO || {};
 
-Brewer.MascaraCpfCnpj = (function() {
+SinapiPRO.MascaraCpfCnpj = (function() {
 	
 	function MascaraCpfCnpj() {
 		this.radioTipoPessoa = $('.js-radio-tipo-pessoa');
@@ -33,6 +33,6 @@ Brewer.MascaraCpfCnpj = (function() {
 }());
 
 $(function() {
-	var mascaraCpfCnpj = new Brewer.MascaraCpfCnpj();
+	var mascaraCpfCnpj = new SinapiPRO.MascaraCpfCnpj();
 	mascaraCpfCnpj.iniciar();
 });

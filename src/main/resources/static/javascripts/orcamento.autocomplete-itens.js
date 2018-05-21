@@ -1,6 +1,6 @@
-Brewer = Brewer || {};
+SinapiPRO = SinapiPRO || {};
 
-Brewer.Autocomplete = (function() {
+SinapiPRO.Autocomplete = (function() {
 	
 	function Autocomplete() {
 		this.skuOuNomeInput = $('.js-sku-nome-composicao-input');
@@ -40,7 +40,7 @@ Brewer.Autocomplete = (function() {
 	}
 	
 	function template(nome, composicao) {
-		composicao.valorFormatado = Brewer.formatarMoeda(composicao.valor);
+		composicao.valorFormatado = SinapiPRO.formatarMoeda(composicao.valor);
 		return this.template(composicao);
 	}
 	

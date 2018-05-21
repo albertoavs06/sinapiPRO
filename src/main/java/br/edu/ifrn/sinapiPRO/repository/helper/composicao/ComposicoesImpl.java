@@ -23,7 +23,7 @@ import br.edu.ifrn.sinapiPRO.model.Composicao;
 import br.edu.ifrn.sinapiPRO.repository.filter.ComposicaoFilter;
 import br.edu.ifrn.sinapiPRO.repository.paginacao.PaginacaoUtil;
 
-public class ComposicaoImpl implements ComposicaoQueries {
+public class ComposicoesImpl implements ComposicoesQueries {
 
 	@PersistenceContext
 	private EntityManager manager;

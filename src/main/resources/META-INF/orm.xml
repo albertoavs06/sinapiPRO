@@ -39,7 +39,7 @@
 				   )) total_internacional
 			 from orcamento v
 			 where v.data_criacao > DATE_SUB(NOW(), INTERVAL 6 MONTH)
-			   and status = 'EMITIDA'
+			   and status = 'EMITIDO'
 			   group by date_format(v.data_criacao, '%Y/%m')  
 			   order by date_format(v.data_criacao, '%Y/%m') desc
 	    </query>
