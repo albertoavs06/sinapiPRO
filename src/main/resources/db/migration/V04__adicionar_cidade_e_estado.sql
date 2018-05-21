@@ -17,6 +17,7 @@ INSERT INTO estado (codigo, nome, sigla) VALUES (3,'Goiás', 'GO');
 INSERT INTO estado (codigo, nome, sigla) VALUES (4,'Minas Gerais', 'MG');
 INSERT INTO estado (codigo, nome, sigla) VALUES (5,'Santa Catarina', 'SC');
 INSERT INTO estado (codigo, nome, sigla) VALUES (6,'São Paulo', 'SP');
+INSERT INTO estado (codigo, nome, sigla) VALUES (7,'Rio Grande do Norte', 'RN');
 
 
 INSERT INTO cidade (nome, codigo_estado) VALUES ('Rio Branco', 1);
@@ -38,3 +39,7 @@ INSERT INTO cidade (nome, codigo_estado) VALUES ('São Paulo', 6);
 INSERT INTO cidade (nome, codigo_estado) VALUES ('Ribeirão Preto', 6);
 INSERT INTO cidade (nome, codigo_estado) VALUES ('Campinas', 6);
 INSERT INTO cidade (nome, codigo_estado) VALUES ('Santos', 6);
+INSERT INTO cidade (nome, codigo_estado) VALUES ('Natal', 7);
+INSERT INTO cidade (nome, codigo_estado) VALUES ('Parnamirim', 7);
+
+
