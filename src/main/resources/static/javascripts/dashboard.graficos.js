@@ -1,12 +1,12 @@
 var SinapiPRO = SinapiPRO || {};
 
-SinapiPRO.GraficoOrcamentoPorMes = (function() {
+SinapiPRO.GraficoOrcamentosPorMes = (function() {
 	
-	function GraficoOrcamentoPorMes() {
+	function GraficoOrcamentosPorMes() {
 		this.ctx = $('#graficoOrcamentosPorMes')[0].getContext('2d');
 	}
 	
-	GraficoOrcamentoPorMes.prototype.iniciar = function() {
+	GraficoOrcamentosPorMes.prototype.iniciar = function() {
 		$.ajax({
 			url: 'orcamentos/totalPorMes',
 			method: 'GET', 
@@ -37,17 +37,17 @@ SinapiPRO.GraficoOrcamentoPorMes = (function() {
 		});
 	}
 	
-	return GraficoOrcamentoPorMes;
+	return GraficoOrcamentosPorMes;
 	
 }());
 
-SinapiPRO.GraficoOrcamentoPorOrigem = (function() {
+SinapiPRO.GraficoOrcamentosPorOrigem = (function() {
 	
-	function GraficoOrcamentoPorOrigem() {
+	function GraficoOrcamentosPorOrigem() {
 		this.ctx = $('#graficoOrcamentosPorOrigem')[0].getContext('2d');
 	}
 	
-	GraficoOrcamentoPorOrigem.prototype.iniciar = function() {
+	GraficoOrcamentosPorOrigem.prototype.iniciar = function() {
 		$.ajax({
 			url: 'orcamentos/porOrigem',
 			method: 'GET', 
@@ -84,15 +84,15 @@ SinapiPRO.GraficoOrcamentoPorOrigem = (function() {
 		});
 	}
 	
-	return GraficoOrcamentoPorOrigem;
+	return GraficoOrcamentosPorOrigem;
 	
 }());
 
 
 $(function() {
-	var graficoOrcamentoPorMes = new SinapiPRO.GraficoOrcamentoPorMes();
-	graficoOrcamentoPorMes.iniciar();
+	var graficoOrcamentosPorMes = new SinapiPRO.GraficoOrcamentosPorMes();
+	graficoOrcamentosPorMes.iniciar();
 	
-	var graficoOrcamentoPorOrigem = new SinapiPRO.GraficoOrcamentoPorOrigem();
-	graficoOrcamentoPorOrigem.iniciar();
+	var graficoOrcamentosPorOrigem = new SinapiPRO.GraficoOrcamentosPorOrigem();
+	graficoOrcamentosPorOrigem.iniciar();
 });
