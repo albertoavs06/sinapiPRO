@@ -17,6 +17,7 @@ public class Endereco implements Serializable {
 	
 	private String numero;
 	
+	
 	@Size(max = 20, message = "O tamanho da descrição deve estar entre 1 e 20")
 	private String complemento;
 	

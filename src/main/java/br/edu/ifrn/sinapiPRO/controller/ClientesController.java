@@ -69,8 +69,7 @@ public class ClientesController {
 	}
 	
 	@GetMapping
-	public ModelAndView pesquisar(ClienteFilter clienteFilter, BindingResult result
-			, @PageableDefault(size = 3) Pageable pageable, HttpServletRequest httpServletRequest) {
+	public ModelAndView pesquisar(ClienteFilter clienteFilter, BindingResult result, @PageableDefault(size = 3) Pageable pageable, HttpServletRequest httpServletRequest) {
 		ModelAndView mv = new ModelAndView("cliente/PesquisaClientes");
 		mv.addObject("tiposPessoa", TipoPessoa.values());
 		

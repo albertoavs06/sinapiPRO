@@ -108,8 +108,7 @@ public class OrcamentosController {
 	}
 	
 	@PutMapping("/item/{codigoComposicao}")
-	public ModelAndView alterarQuantidadeItem(@PathVariable("codigoComposicao") Composicao composicao
-			, Integer quantidade, String uuid) {
+	public ModelAndView alterarQuantidadeItem(@PathVariable("codigoComposicao") Composicao composicao, Integer quantidade, String uuid) {
 		tabelaItens.alterarQuantidadeItens(uuid, composicao, quantidade);
 		return mvTabelaItensOrcamento(uuid);
 	}
@@ -149,8 +148,7 @@ public class OrcamentosController {
 	}
 	
 	@PostMapping(value = "/nova", params = "cancelar")
-	public ModelAndView cancelar(Orcamento orcamento, BindingResult result
-				, RedirectAttributes attributes, @AuthenticationPrincipal UsuarioSistema usuarioSistema) {
+	public ModelAndView cancelar(Orcamento orcamento, BindingResult result, RedirectAttributes attributes, @AuthenticationPrincipal UsuarioSistema usuarioSistema) {
 		try {
 			cadastroOrcamentoService.cancelar(orcamento);
 		} catch (AccessDeniedException e) {
