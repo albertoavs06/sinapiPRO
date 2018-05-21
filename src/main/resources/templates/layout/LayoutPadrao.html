@@ -9,10 +9,10 @@
 
 	<title>SinapiPRO</title>
 
-	<link rel="stylesheet" type="text/css"  th:href="@{/layout/stylesheets/vendors.min.css}"/>
-	<link rel="stylesheet" type="text/css"  th:href="@{/layout/stylesheets/SinapiPRO.min.css}"/>
-	<link rel="stylesheet" type="text/css"  th:href="@{/layout/stylesheets/application.css}"/>
-	<link rel="stylesheet" type="text/css"  th:href="@{/stylesheets/SinapiPRO.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/vendors.min.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/SinapiPRO.min.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/application.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/SinapiPRO.css}"/>
 	<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/vendors/bootstrap-datepicker.standalone.min.css}"/>
 	
 	<link rel="shortcut icon" th:href="@{/images/favicon.png}"/>
@@ -34,10 +34,11 @@
 	
 	<div th:replace="layout/fragments/MenuLateral :: layout-sidebar"></div>
 	
-	<section class="aw-layout-content  js-content" layout:fragment="conteudo"></section>
+	<section class="aw-layout-content js-content" layout:fragment="conteudo"></section>
 	
 	<div th:replace="layout/fragments/Footer :: layout-footer"></div>
 </div>
+
 <script th:src="@{/layout/javascripts/vendors.min.js}"></script>
 <script th:src="@{/layout/javascripts/SinapiPRO.min.js}"></script>
 
