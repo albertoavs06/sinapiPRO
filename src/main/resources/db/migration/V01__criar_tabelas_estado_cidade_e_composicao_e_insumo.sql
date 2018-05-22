@@ -23,7 +23,7 @@ CREATE TABLE composicao (
     base VARCHAR(50) NOT NULL,
     codigo_estado BIGINT(20) NOT NULL,
     quantidade_estoque  BIGINT(20),
-    content_type VARCHAR(100);
+    content_type VARCHAR(100),
     FOREIGN KEY (codigo_estado) REFERENCES estado(codigo)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -39,7 +39,7 @@ CREATE TABLE insumo (
     preco DECIMAL(10, 2) NOT NULL,
     codigo_estado BIGINT(20) NOT NULL,
     quantidade_estoque  BIGINT(20),
-    content_type VARCHAR(100);
+    content_type VARCHAR(100),
     FOREIGN KEY (codigo_estado) REFERENCES estado(codigo)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
