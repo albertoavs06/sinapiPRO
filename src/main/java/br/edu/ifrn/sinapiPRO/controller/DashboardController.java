@@ -21,14 +21,13 @@ public class DashboardController {
 	@Autowired
 	private Clientes clientes;
 	
-	@GetMapping("/")
+	@GetMapping("/dashboard")
 	public ModelAndView dashboard() {
 		ModelAndView mv = new ModelAndView("Dashboard");
 		
 		mv.addObject("orcamentosNoAno", orcamentos.valorTotalNoAno());
 		mv.addObject("orcamentosNoMes", orcamentos.valorTotalNoMes());
 		mv.addObject("ticketMedio", orcamentos.valorTicketMedioNoAno());
-		
 		mv.addObject("valorItensEstoque", composicoes.valorItensEstoque());
 		mv.addObject("totalClientes", clientes.count());
 		
