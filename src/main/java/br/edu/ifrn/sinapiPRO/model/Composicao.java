@@ -22,8 +22,6 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.springframework.util.StringUtils;
-
 import br.edu.ifrn.sinapiPRO.validation.SKU;
 
 @Entity
@@ -72,10 +70,10 @@ public class Composicao implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Sabor sabor;
 
-	@NotNull(message = "O estilo é obrigatório")
+	@NotNull(message = "O estado é obrigatório")
 	@ManyToOne
-	@JoinColumn(name = "codigo_estilo")
-	private Estilo estilo;
+	@JoinColumn(name = "codigo_estado")
+	private Estado estado;
 
 	@Column(name = "content_type")
 	private String contentType;
@@ -166,12 +164,12 @@ public class Composicao implements Serializable {
 		this.sabor = sabor;
 	}
 
-	public Estilo getEstilo() {
-		return estilo;
+	public Estado getEstado() {
+		return estado;
 	}
 
-	public void setEstilo(Estilo estilo) {
-		this.estilo = estilo;
+	public void setEstado(Estado estado) {
+		this.estado = estado;
 	}
 
 	public String getContentType() {

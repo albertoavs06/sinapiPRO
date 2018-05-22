@@ -3,10 +3,11 @@ package br.edu.ifrn.sinapiPRO.model;
 import java.math.BigDecimal;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -15,22 +16,45 @@ public class Insumo {
 
 	@Id
 	private Integer codigo;
+	private String uf; 
+	private String anoMes; 
+	private String base; 
 	
 	@Size(max = 400)
 	private String descricao; 
-	
 	private String unidade; 
-	
-	@Enumerated(EnumType.STRING)
-	private String base; 
+	private String origem; 
 	
 	private BigDecimal preco;
+	
+	@NotNull(message = "O estado é obrigatório")
+	@ManyToOne
+	@JoinColumn(name = "codigo_estado")
+	private Estado estado;
 
 	public Integer getCodigo() {
 		return codigo;
 	}
 	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
+	}	
+	public String getUf() {
+		return uf;
+	}
+	public void setUf(String uf) {
+		this.uf = uf;
+	}
+	public String getAnoMes() {
+		return anoMes;
+	}	
+	public String getBase() {
+		return base;
+	}
+	public void setBase(String base) {
+		this.base = base;
+	}
+	public void setAnoMes(String anoMes) {
+		this.anoMes = anoMes;
 	}
 	public String getDescricao() {
 		return descricao;
@@ -44,17 +68,24 @@ public class Insumo {
 	public void setUnidade(String unidade) {
 		this.unidade = unidade;
 	}
-	public String getBase() {
-		return base;
+	public String getOrigem() {
+		return origem;
 	}
-	public void setBase(String base) {
-		this.base = base;
+	public void setOrigem(String origem) {
+		this.origem = origem;
 	}
 	public BigDecimal getPreco() {
 		return preco;
 	}
 	public void setPreco(BigDecimal preco) {
 		this.preco = preco;
+	}
+	
+	public Estado getEstado() {
+		return estado;
+	}
+	public void setEstado(Estado estado) {
+		this.estado = estado;
 	}
 	@Override
 	public int hashCode() {
@@ -81,10 +112,7 @@ public class Insumo {
 	}
 	@Override
 	public String toString() {
-		return "SinapiInsumo [codigo=" + codigo + ", descricao=" + descricao + ", unidade=" + unidade + ", base="
-				+ base + ", preco=" + preco + "]";
+		return "Insumo [codigo=" + codigo + ", descricao=" + descricao + ", unidade=" + unidade + ", origem="
+				+ origem + ", preco=" + preco + "]";
 	} 
-	
-	
 }
-

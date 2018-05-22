@@ -2,15 +2,15 @@ package br.edu.ifrn.sinapiPRO.repository.filter;
 
 import java.math.BigDecimal;
 
-import br.edu.ifrn.sinapiPRO.model.Estilo;
 import br.edu.ifrn.sinapiPRO.model.Base;
+import br.edu.ifrn.sinapiPRO.model.Estado;
 import br.edu.ifrn.sinapiPRO.model.Sabor;
 
 public class ComposicaoFilter {
 
 	private String sku;
 	private String nome;
-	private Estilo estilo;
+	private Estado estado;
 	private Sabor sabor;
 	private Base base;
 	private BigDecimal valorDe;
@@ -32,12 +32,12 @@ public class ComposicaoFilter {
 		this.nome = nome;
 	}
 
-	public Estilo getEstilo() {
-		return estilo;
+	public Estado getEstado() {
+		return estado;
 	}
 
-	public void setEstilo(Estilo estilo) {
-		this.estilo = estilo;
+	public void setEstado(Estado estado) {
+		this.estado = estado;
 	}
 
 	public Sabor getSabor() {

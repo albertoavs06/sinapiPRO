@@ -78,8 +78,8 @@ public class ComposicoesImpl implements ComposicoesQueries {
 				criteria.add(Restrictions.ilike("nome", filtro.getNome(), MatchMode.ANYWHERE));
 			}
 
-			if (isEstiloPresente(filtro)) {
-				criteria.add(Restrictions.eq("estilo", filtro.getEstilo()));
+			if (isEstadoPresente(filtro)) {
+				criteria.add(Restrictions.eq("estado", filtro.getEstado()));
 			}
 
 			if (filtro.getSabor() != null) {
@@ -100,8 +100,8 @@ public class ComposicoesImpl implements ComposicoesQueries {
 		}
 	}
 	
-	private boolean isEstiloPresente(ComposicaoFilter filtro) {
-		return filtro.getEstilo() != null && filtro.getEstilo().getCodigo() != null;
+	private boolean isEstadoPresente(ComposicaoFilter filtro) {
+		return filtro.getEstado() != null && filtro.getEstado().getCodigo() != null;
 	}
 
 }

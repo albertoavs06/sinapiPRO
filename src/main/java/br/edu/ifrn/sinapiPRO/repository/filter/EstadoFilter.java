@@ -1,6 +1,6 @@
 package br.edu.ifrn.sinapiPRO.repository.filter;
 
-public class EstiloFilter {
+public class EstadoFilter {
 
 	private String nome;
 

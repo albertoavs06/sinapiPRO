@@ -19,61 +19,59 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.edu.ifrn.sinapiPRO.controller.page.PageWrapper;
-import br.edu.ifrn.sinapiPRO.model.Estilo;
-import br.edu.ifrn.sinapiPRO.repository.Estilos;
-import br.edu.ifrn.sinapiPRO.repository.filter.EstiloFilter;
-import br.edu.ifrn.sinapiPRO.service.CadastroEstiloService;
-import br.edu.ifrn.sinapiPRO.service.exception.NomeEstiloJaCadastradoException;
+import br.edu.ifrn.sinapiPRO.model.Estado;
+import br.edu.ifrn.sinapiPRO.repository.Estados;
+import br.edu.ifrn.sinapiPRO.repository.filter.EstadoFilter;
+import br.edu.ifrn.sinapiPRO.service.CadastroEstadoService;
+import br.edu.ifrn.sinapiPRO.service.exception.NomeEstadoJaCadastradoException;
 
 @Controller
-@RequestMapping("/estilos")
-public class EstilosController {
+@RequestMapping("/estados")
+public class EstadosController {
 
 	@Autowired
-	private CadastroEstiloService cadastroEstiloService;
+	private CadastroEstadoService cadastroEstadoService;
 	
 	@Autowired
-	private Estilos estilos;
+	private Estados estados;
 	
 	@RequestMapping("/novo")
-	public ModelAndView novo(Estilo estilo) {
-		return new ModelAndView("estilo/CadastroEstilo");
+	public ModelAndView novo(Estado estado) {
+		return new ModelAndView("estado/CadastroEstado");
 	}
 	
 	@RequestMapping(value = "/novo", method = RequestMethod.POST)
-	public ModelAndView cadastrar(@Valid Estilo estilo, BindingResult result, RedirectAttributes attributes) {
+	public ModelAndView cadastrar(@Valid Estado estado, BindingResult result, RedirectAttributes attributes) {
 		if (result.hasErrors()) {
-			return novo(estilo);
+			return novo(estado);
 		}
 		
 		try {
-			cadastroEstiloService.salvar(estilo);
-		} catch (NomeEstiloJaCadastradoException e) {
+			cadastroEstadoService.salvar(estado);
+		} catch (NomeEstadoJaCadastradoException e) {
 			result.rejectValue("nome", e.getMessage(), e.getMessage());
-			return novo(estilo);
+			return novo(estado);
 		}
 		
-		attributes.addFlashAttribute("mensagem", "Estilo salvo com sucesso");
-		return new ModelAndView("redirect:/estilos/novo");
+		attributes.addFlashAttribute("mensagem", "Estado salvo com sucesso");
+		return new ModelAndView("redirect:/estados/novo");
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
-	public @ResponseBody ResponseEntity<?> salvar(@RequestBody @Valid Estilo estilo, BindingResult result) {
+	public @ResponseBody ResponseEntity<?> salvar(@RequestBody @Valid Estado estado, BindingResult result) {
 		if (result.hasErrors()) {
 			return ResponseEntity.badRequest().body(result.getFieldError("nome").getDefaultMessage());
 		}
 		
-		estilo = cadastroEstiloService.salvar(estilo);
-		return ResponseEntity.ok(estilo);
+		estado = cadastroEstadoService.salvar(estado);
+		return ResponseEntity.ok(estado);
 	}
 	
 	@GetMapping
-	public ModelAndView pesquisar(EstiloFilter estiloFilter, BindingResult result
-			, @PageableDefault(size = 2) Pageable pageable, HttpServletRequest httpServletRequest) {
-		ModelAndView mv = new ModelAndView("estilo/PesquisaEstilos");
+	public ModelAndView pesquisar(EstadoFilter estadoFilter, BindingResult result, @PageableDefault(size = 2) Pageable pageable, HttpServletRequest httpServletRequest) {
+		ModelAndView mv = new ModelAndView("estado/PesquisaEstados");
 		
-		PageWrapper<Estilo> paginaWrapper = new PageWrapper<>(estilos.filtrar(estiloFilter, pageable)
-				, httpServletRequest);
+		PageWrapper<Estado> paginaWrapper = new PageWrapper<>(estados.filtra(estadoFilter, pageable), httpServletRequest);
 		mv.addObject("pagina", paginaWrapper);
 		return mv;
 	}

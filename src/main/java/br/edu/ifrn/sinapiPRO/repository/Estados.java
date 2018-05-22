@@ -1,9 +1,13 @@
 package br.edu.ifrn.sinapiPRO.repository;
 
-import br.edu.ifrn.sinapiPRO.model.Estado;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface Estados extends JpaRepository<Estado, Long> {
+import br.edu.ifrn.sinapiPRO.model.Estado;
+import br.edu.ifrn.sinapiPRO.repository.helper.estado.EstadosQueries;
 
+public interface Estados extends JpaRepository<Estado, Long>, EstadosQueries {
+	
+	public Optional<Estado> findByNomeIgnoreCase(String nome);
 }
