@@ -1,13 +1,13 @@
 package br.edu.ifrn.sinapiPRO.model;
 
-public enum Origem {
+public enum Base {
 
-	NACIONAL("Nacional"),
-	INTERNACIONAL("Internacional");
+	SINAPI("Sinapi"),
+	PROPRIA("Propria");
 	
 	private String descricao;
 	
-	Origem(String descricao) {
+	Base(String descricao) {
 		this.descricao = descricao;
 	}
 	

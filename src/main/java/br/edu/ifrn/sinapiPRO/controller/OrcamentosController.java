@@ -26,7 +26,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.edu.ifrn.sinapiPRO.controller.page.PageWrapper;
 import br.edu.ifrn.sinapiPRO.controller.validator.OrcamentoValidator;
 import br.edu.ifrn.sinapiPRO.dto.OrcamentoMes;
-import br.edu.ifrn.sinapiPRO.dto.OrcamentoOrigem;
+import br.edu.ifrn.sinapiPRO.dto.OrcamentoBase;
 import br.edu.ifrn.sinapiPRO.model.Composicao;
 import br.edu.ifrn.sinapiPRO.model.ItemOrcamento;
 import br.edu.ifrn.sinapiPRO.model.StatusOrcamento;
@@ -166,9 +166,9 @@ public class OrcamentosController {
 		return orcamentos.totalPorMes();
 	}
 	
-	@GetMapping("/porOrigem")
-	public @ResponseBody List<OrcamentoOrigem> orcamentosPorNacionalidade() {
-		return this.orcamentos.totalPorOrigem();
+	@GetMapping("/porBase")
+	public @ResponseBody List<OrcamentoBase> orcamentosPorNacionalidade() {
+		return this.orcamentos.totalPorBase();
 	}
 	
 	private ModelAndView mvTabelaItensOrcamento(String uuid) {

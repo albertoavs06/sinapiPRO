@@ -105,7 +105,7 @@
 	width: 120px;
 }
 
-.table-composicoes-col-origem {
+.table-composicoes-col-base {
 	width: 100px;
 }
 
@@ -254,7 +254,7 @@
 	display: block;
 }
 
-.bw-tabela-composicao-origem {
+.bw-tabela-composicao-base {
 	color: #aaa;
 	display: block;
 	font-weight: 200;

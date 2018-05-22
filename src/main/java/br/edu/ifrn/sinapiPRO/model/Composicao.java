@@ -64,9 +64,9 @@ public class Composicao implements Serializable {
 	@Column(name = "quantidade_estoque")
 	private Integer quantidadeEstoque;
 
-	@NotNull(message = "A origem é obrigatória")
+	@NotNull(message = "A base é obrigatória")
 	@Enumerated(EnumType.STRING)
-	private Origem origem;
+	private Base base;
 
 	@NotNull(message = "O sabor é obrigatório")
 	@Enumerated(EnumType.STRING)
@@ -150,12 +150,12 @@ public class Composicao implements Serializable {
 		this.quantidadeEstoque = quantidadeEstoque;
 	}
 
-	public Origem getOrigem() {
-		return origem;
+	public Base getBase() {
+		return base;
 	}
 
-	public void setOrigem(Origem origem) {
-		this.origem = origem;
+	public void setBase(Base base) {
+		this.base = base;
 	}
 
 	public Sabor getSabor() {

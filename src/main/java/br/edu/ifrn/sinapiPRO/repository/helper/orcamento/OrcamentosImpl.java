@@ -26,7 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import br.edu.ifrn.sinapiPRO.dto.OrcamentoMes;
-import br.edu.ifrn.sinapiPRO.dto.OrcamentoOrigem;
+import br.edu.ifrn.sinapiPRO.dto.OrcamentoBase;
 import br.edu.ifrn.sinapiPRO.model.StatusOrcamento;
 import br.edu.ifrn.sinapiPRO.model.TipoPessoa;
 import br.edu.ifrn.sinapiPRO.model.Orcamento;
@@ -113,8 +113,8 @@ public class OrcamentosImpl implements OrcamentosQueries {
 	}
 	
 	@Override
-	public List<OrcamentoOrigem> totalPorOrigem() {
-		List<OrcamentoOrigem> orcamentosNacionalidade = manager.createNamedQuery("Orcamentos.porOrigem", OrcamentoOrigem.class).getResultList();
+	public List<OrcamentoBase> totalPorBase() {
+		List<OrcamentoBase> orcamentosNacionalidade = manager.createNamedQuery("Orcamentos.porBase", OrcamentoBase.class).getResultList();
 		
 		LocalDate now = LocalDate.now();
 		for (int i = 1; i <= 6; i++) {
@@ -122,7 +122,7 @@ public class OrcamentosImpl implements OrcamentosQueries {
 			
 			boolean possuiMes = orcamentosNacionalidade.stream().filter(v -> v.getMes().equals(mesIdeal)).findAny().isPresent();
 			if (!possuiMes) {
-				orcamentosNacionalidade.add(i - 1, new OrcamentoOrigem(mesIdeal, 0, 0));
+				orcamentosNacionalidade.add(i - 1, new OrcamentoBase(mesIdeal, 0, 0));
 			}
 			
 			now = now.minusMonths(1);

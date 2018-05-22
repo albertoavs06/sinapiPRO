@@ -3,7 +3,7 @@ package br.edu.ifrn.sinapiPRO.repository.filter;
 import java.math.BigDecimal;
 
 import br.edu.ifrn.sinapiPRO.model.Estilo;
-import br.edu.ifrn.sinapiPRO.model.Origem;
+import br.edu.ifrn.sinapiPRO.model.Base;
 import br.edu.ifrn.sinapiPRO.model.Sabor;
 
 public class ComposicaoFilter {
@@ -12,7 +12,7 @@ public class ComposicaoFilter {
 	private String nome;
 	private Estilo estilo;
 	private Sabor sabor;
-	private Origem origem;
+	private Base base;
 	private BigDecimal valorDe;
 	private BigDecimal valorAte;
 
@@ -48,12 +48,12 @@ public class ComposicaoFilter {
 		this.sabor = sabor;
 	}
 
-	public Origem getOrigem() {
-		return origem;
+	public Base getBase() {
+		return base;
 	}
 
-	public void setOrigem(Origem origem) {
-		this.origem = origem;
+	public void setBase(Base base) {
+		this.base = base;
 	}
 
 	public BigDecimal getValorDe() {

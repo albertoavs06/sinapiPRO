@@ -1,16 +1,16 @@
 package br.edu.ifrn.sinapiPRO.dto;
 
-public class OrcamentoOrigem {
+public class OrcamentoBase {
 
 	private String mes;
 	private Integer totalNacional;
 	private Integer totalInternacional;
 	
-	public OrcamentoOrigem() {
+	public OrcamentoBase() {
 		
 	}
 
-	public OrcamentoOrigem(String mes, Integer totalNacional, Integer totalInternacional) {
+	public OrcamentoBase(String mes, Integer totalNacional, Integer totalInternacional) {
 		this.mes = mes;
 		this.totalNacional = totalNacional;
 		this.totalInternacional = totalInternacional;

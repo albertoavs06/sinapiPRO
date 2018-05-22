@@ -182,7 +182,7 @@ Orcamento
             tipo (N=Nivel, S=Subnivel, C-Composição, I-Insumo)
             codigo_item
             ordem
-            origem
+            base
             descricao_item
             unidade
             coeficiente

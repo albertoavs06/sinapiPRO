@@ -91,13 +91,13 @@
 					</div>
 				</div>
 				
-				<div class="col-lg-3  col-sm-6  form-group  bw-required" sinapiPRO:classforerror="origem">
-					<label for="origem" class="control-label">Origem</label>
+				<div class="col-lg-3  col-sm-6  form-group  bw-required" sinapiPRO:classforerror="base">
+					<label for="base" class="control-label">Base</label>
 					<div>
-						<th:block th:each="origem : ${origens}">
+						<th:block th:each="base : ${origens}">
 							<div class="radio  radio-inline">
-								<input th:id="|id_${origem}|" type="radio" th:value="${origem}" th:field="*{origem}"> 
-								<label th:for="|id_${origem}|" th:text="${origem.descricao}">Nacional</label>
+								<input th:id="|id_${base}|" type="radio" th:value="${base}" th:field="*{base}"> 
+								<label th:for="|id_${base}|" th:text="${base.descricao}">Nacional</label>
 							</div>
 						</th:block>
 					</div>

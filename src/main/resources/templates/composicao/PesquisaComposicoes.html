@@ -63,16 +63,16 @@
 			
 			<div class="row">
 				<div class="form-group  col-sm-6">
-					<label class="control-label">Origem</label> 
+					<label class="control-label">Base</label> 
 					<div>
-	  					<th:block th:each="origem : ${origens}">
+	  					<th:block th:each="base : ${origens}">
 	  						<div class="radio  radio-inline">
-		    					<input th:id="|id_${origem}|" type="radio" th:value="${origem}" th:field="*{origem}"/>
-		    					<label th:for="|id_${origem}|" th:text="${origem.descricao}">Nacional</label>
+		    					<input th:id="|id_${base}|" type="radio" th:value="${base}" th:field="*{base}"/>
+		    					<label th:for="|id_${base}|" th:text="${base.descricao}">Nacional</label>
 	    					</div>
 	  					</th:block>
 	  					<div class="radio  radio-inline">
-		    				<input id="todasOrigens" type="radio" th:checked="*{origem} == null" name="origem"/>
+		    				<input id="todasOrigens" type="radio" th:checked="*{base} == null" name="base"/>
 		    				<label for="todasOrigens" >Todas</label>
 	    				</div>
 					</div>
@@ -103,7 +103,7 @@
 							<sinapiPRO:order page="${pagina}" field="nome" text="Nome"/>
 						</th>
 						<th class="table-composicoes-col-estilo">Estilo</th>
-						<th class="table-composicoes-col-origem">Origem</th>
+						<th class="table-composicoes-col-base">Base</th>
 						<th class="table-composicoes-col-valor">Valor</th>
 						<th class="table-composicoes-col-acoes"></th>
 					</tr>
@@ -118,7 +118,7 @@
 						<td class="text-center" th:text="${composicao.sku}">AA1234</td>
 						<td th:text="${composicao.nome}">Composicao Stella</td>
 						<td th:text="${composicao.estilo.nome}">Lager</td>
-						<td th:text="${composicao.origem.descricao}">Internacional</td>
+						<td th:text="${composicao.base.descricao}">Internacional</td>
 						<td class="text-right" th:text="|R$ ${{composicao.valor}}|">R$ 8.00</td>
 						<td class="text-center">
 							<a class="btn  btn-link  btn-xs  js-tooltip" title="Editar" 

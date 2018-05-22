@@ -1,91 +1,61 @@
 package br.edu.ifrn.sinapiPRO.model;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "Insumo")
+@Table(name = "sinapi_insumos")
 public class Insumo {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codigo;
-	
-	private Boolean ativo;
-	private String descricao; 
-	private String divisao; 
-	private String subDivisao; 
-	
-	@NotNull(message = "A unidade é obrigatório")
-	@Enumerated(EnumType.STRING)
-	private Unidade unidade;
-	
-	@NotNull(message = "A espécie é obrigatório")
-	@Enumerated(EnumType.STRING)
-	private EspecieInsumo especieInsumo;
 
-	public Long getCodigo() {
+	@Id
+	private Integer codigo;
+	
+	@Size(max = 400)
+	private String descricao; 
+	
+	private String unidade; 
+	
+	@Enumerated(EnumType.STRING)
+	private String base; 
+	
+	private BigDecimal preco;
+
+	public Integer getCodigo() {
 		return codigo;
 	}
-
-	public void setCodigo(Long codigo) {
+	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
 	}
-
-	public Boolean getAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
-	}
-
 	public String getDescricao() {
 		return descricao;
 	}
-
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
-	public String getDivisao() {
-		return divisao;
-	}
-
-	public void setDivisao(String divisao) {
-		this.divisao = divisao;
-	}
-
-	public String getSubDivisao() {
-		return subDivisao;
-	}
-
-	public void setSubDivisao(String subDivisao) {
-		this.subDivisao = subDivisao;
-	}
-
-	public Unidade getUnidade() {
+	public String getUnidade() {
 		return unidade;
 	}
-
-	public void setUnidade(Unidade unidade) {
+	public void setUnidade(String unidade) {
 		this.unidade = unidade;
 	}
-
-	public EspecieInsumo getEspecieInsumo() {
-		return especieInsumo;
+	public String getBase() {
+		return base;
 	}
-
-	public void setEspecieInsumo(EspecieInsumo especieInsumo) {
-		this.especieInsumo = especieInsumo;
+	public void setBase(String base) {
+		this.base = base;
 	}
-
+	public BigDecimal getPreco() {
+		return preco;
+	}
+	public void setPreco(BigDecimal preco) {
+		this.preco = preco;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -93,7 +63,6 @@ public class Insumo {
 		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -110,5 +79,12 @@ public class Insumo {
 			return false;
 		return true;
 	}
+	@Override
+	public String toString() {
+		return "SinapiInsumo [codigo=" + codigo + ", descricao=" + descricao + ", unidade=" + unidade + ", base="
+				+ base + ", preco=" + preco + "]";
+	} 
+	
 	
 }
+

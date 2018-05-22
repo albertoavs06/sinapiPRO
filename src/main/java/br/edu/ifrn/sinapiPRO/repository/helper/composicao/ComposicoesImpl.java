@@ -47,7 +47,7 @@ public class ComposicoesImpl implements ComposicoesQueries {
 	
 	@Override
 	public List<ComposicaoDTO> porSkuOuNome(String skuOuNome) {
-		String jpql = "select new br.edu.ifrn.sinapiPRO.dto.ComposicaoDTO(codigo, sku, nome, origem, valor) "
+		String jpql = "select new br.edu.ifrn.sinapiPRO.dto.ComposicaoDTO(codigo, sku, nome, base, valor) "
 				+ "from Composicao where lower(sku) like lower(:skuOuNome) or lower(nome) like lower(:skuOuNome)";
 		List<ComposicaoDTO> composicoesFiltradas = manager.createQuery(jpql, ComposicaoDTO.class)
 					.setParameter("skuOuNome", skuOuNome + "%")
@@ -86,8 +86,8 @@ public class ComposicoesImpl implements ComposicoesQueries {
 				criteria.add(Restrictions.eq("sabor", filtro.getSabor()));
 			}
 
-			if (filtro.getOrigem() != null) {
-				criteria.add(Restrictions.eq("origem", filtro.getOrigem()));
+			if (filtro.getBase() != null) {
+				criteria.add(Restrictions.eq("base", filtro.getBase()));
 			}
 
 			if (filtro.getValorDe() != null) {

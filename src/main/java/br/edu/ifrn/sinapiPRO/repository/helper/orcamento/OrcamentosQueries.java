@@ -7,7 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import br.edu.ifrn.sinapiPRO.dto.OrcamentoMes;
-import br.edu.ifrn.sinapiPRO.dto.OrcamentoOrigem;
+import br.edu.ifrn.sinapiPRO.dto.OrcamentoBase;
 import br.edu.ifrn.sinapiPRO.model.Orcamento;
 import br.edu.ifrn.sinapiPRO.repository.filter.OrcamentoFilter;
 
@@ -22,6 +22,6 @@ public interface OrcamentosQueries {
 	public BigDecimal valorTicketMedioNoAno();
 	
 	public List<OrcamentoMes> totalPorMes();
-	public List<OrcamentoOrigem> totalPorOrigem();
+	public List<OrcamentoBase> totalPorBase();
 	
 }

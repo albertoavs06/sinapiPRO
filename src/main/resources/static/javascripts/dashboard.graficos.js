@@ -41,32 +41,32 @@ SinapiPRO.GraficoOrcamentosPorMes = (function() {
 	
 }());
 
-SinapiPRO.GraficoOrcamentosPorOrigem = (function() {
+SinapiPRO.GraficoOrcamentosPorBase = (function() {
 	
-	function GraficoOrcamentosPorOrigem() {
-		this.ctx = $('#graficoOrcamentosPorOrigem')[0].getContext('2d');
+	function GraficoOrcamentosPorBase() {
+		this.ctx = $('#graficoOrcamentosPorBase')[0].getContext('2d');
 	}
 	
-	GraficoOrcamentosPorOrigem.prototype.iniciar = function() {
+	GraficoOrcamentosPorBase.prototype.iniciar = function() {
 		$.ajax({
-			url: 'orcamentos/porOrigem',
+			url: 'orcamentos/porBase',
 			method: 'GET', 
 			success: onDadosRecebidos.bind(this)
 		});
 	}
 	
-	function onDadosRecebidos(orcamentoOrigem) {
+	function onDadosRecebidos(orcamentoBase) {
 		var meses = [];
 		var composicoesNacionais = [];
 		var composicoesInternacionais = [];
 		
-		orcamentoOrigem.forEach(function(obj) {
+		orcamentoBase.forEach(function(obj) {
 			meses.unshift(obj.mes);
 			composicoesNacionais.unshift(obj.totalNacional);
 			composicoesInternacionais.unshift(obj.totalInternacional)
 		});
 		
-		var graficoOrcamentosPorOrigem = new Chart(this.ctx, {
+		var graficoOrcamentosPorBase = new Chart(this.ctx, {
 		    type: 'bar',
 		    data: {
 		    	labels: meses,
@@ -84,7 +84,7 @@ SinapiPRO.GraficoOrcamentosPorOrigem = (function() {
 		});
 	}
 	
-	return GraficoOrcamentosPorOrigem;
+	return GraficoOrcamentosPorBase;
 	
 }());
 
@@ -93,6 +93,6 @@ $(function() {
 	var graficoOrcamentosPorMes = new SinapiPRO.GraficoOrcamentosPorMes();
 	graficoOrcamentosPorMes.iniciar();
 	
-	var graficoOrcamentosPorOrigem = new SinapiPRO.GraficoOrcamentosPorOrigem();
-	graficoOrcamentosPorOrigem.iniciar();
+	var graficoOrcamentosPorBase = new SinapiPRO.GraficoOrcamentosPorBase();
+	graficoOrcamentosPorBase.iniciar();
 });
